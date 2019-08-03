@@ -1,0 +1,57 @@
+*{padding:0;margin:0;}
+/* fontawesom */
+.fa {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.fa-square:before {
+  content: "\f0c8";
+}
+.fa-play:before {
+  content: "\f04b";
+}
+.fa-rotate-180 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+:root .fa-rotate-180 {
+  filter: none;
+}
+/* fontawesom */
+/* tbi float */
+.tbi_float{
+	z-index:999;
+	position:fixed;
+	width:120px;
+	height:64px;
+	top:calc(60px);
+	left:0px;
+	background-color:#ffffff;
+	border-top:1px solid #f18900;
+	border-right:1px solid #f18900;
+	border-bottom:1px solid #f18900;
+	color:#FFF;
+	border-top-right-radius:8px;
+	border-bottom-right-radius:8px;
+	text-align:left;
+	box-shadow: 2px 2px 3px #999;
+	cursor:pointer;
+}
+.tbi-my-float{
+	margin-top:0px;
+	margin-left:0px;
+}
+.tbi-text-float{
+	color:#2E92CA;
+	font-size:38px;
+	font-weight:bold;
+	margin-top:0px;
+	margin-left:0px;
+}
+/* tbi float */
