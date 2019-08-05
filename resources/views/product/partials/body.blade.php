@@ -230,9 +230,6 @@
 	<li class="nav-item">
 		<a class="nav-link" id="profile-tab" data-toggle="tab" href="#specification" role="tab" aria-controls="specification" aria-selected="false">Спецификация</a>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" id="contact-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Отзиви</a>
-	</li>
 </ul>
 <div class="tab-content" id="myTabContent">
 	<div class="tab-pane fade show active" id="opisanie" role="tabpanel" aria-labelledby="home-tab">
@@ -264,12 +261,6 @@
 				<li class="list-group-item">Тегло на продукта: <span id="spec_teglo" class="font-weight-bold"><mark>{{ $shirina_q }}</mark> mm</span></li>
 				<li class="list-group-item">Ценова листа за продукта: </li>
 			</ul>						
-		</div>
-		<hr />
-	</div>
-	<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="contact-tab">
-		<div class="card-body text-secondary">
-			<h5 class="card-title">Отзиви за продукта: {{ $product->name }}</h5>
 		</div>
 		<hr />
 	</div>
