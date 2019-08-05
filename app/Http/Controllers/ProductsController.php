@@ -23,6 +23,11 @@ class ProductsController extends Controller
         $firms_id = FirmsController::getFirmsByIsshop();
 		$products = Product::whereIn('firm_id', $firms_id)->where('firm_id', $firm_id)->where('isshop', '>', 0)->paginate(9);
 		return $products;
+    }
+    
+    public static function getProductsByCategory($category_id){
+		$products = Product::where('category_id', $category_id)->where('isshop', '>', 0)->paginate(9);
+		return $products;
 	}
 
 	public static function getProductsByTermin($termin){

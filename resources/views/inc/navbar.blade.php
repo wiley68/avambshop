@@ -1,4 +1,5 @@
 <?php use App\Http\Controllers\FirmsController;?>
+<?php use App\Http\Controllers\CategoriesProductsController;?>
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
 	<div class="container">
 		<a class="navbar-brand" href="/">AVAMB Shop</a>
@@ -9,9 +10,19 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item {{ Request::is('/') ? 'active' : '' }}"><a class="nav-link" href="/">Начало <span class="sr-only">(current)</span></a></li>
-				<li class="nav-item {{ Request::is('products') ? 'active' : '' }}"><a class="nav-link" href="/products">Продукти</a></li>
+				<li class="nav-item dropdown {{ Request::is('products/by_category') ? 'active' : '' }}">
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Категории <span class="caret"></span></a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item {{ (Request::is('products/by_category')) ? 'active' : '' }}" href="/products">Всички продукти</a>
+                        @if(count(CategoriesProductsController::getCategories()) > 0)
+							@foreach(CategoriesProductsController::getCategories() as $category)
+								<a class="dropdown-item {{ (Request::is('products/by_category') AND (request()->get('category_id') == $category->id)) ? 'active' : '' }}" href="{{ route('products.by_category', ['id' => $category->id]) }}">{{ $category->name }}</a>
+							@endforeach
+						@endif
+					</div>
+				</li>
 				<li class="nav-item dropdown {{ Request::is('products/by_firm') ? 'active' : '' }}">
-					<a href="firms" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Производители <span class="caret"></span></a>
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Производители <span class="caret"></span></a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						@if(count(FirmsController::getFirms()) > 0)
 							@foreach(FirmsController::getFirms() as $firm)

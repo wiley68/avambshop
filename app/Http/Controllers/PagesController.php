@@ -65,6 +65,13 @@ class PagesController extends Controller
 		return view('products/products-by-firm')->with([
 			'firm' => $firm
 		]);
+    }
+    
+    public function getProductsByCategory(Request $request, $id=null){
+		$category = CategoriesProductsController::getCategoryById($id)->first();
+		return view('products/products-by-category')->with([
+			'category' => $category
+		]);
 	}
 
 	public function getFirms(){

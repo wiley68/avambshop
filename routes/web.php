@@ -23,6 +23,7 @@ Route::get('/vrashtane', 'PagesController@getVrashtane');
 Route::get('/products', 'PagesController@getProducts');
 Route::post('/products/search', 'PagesController@getProductsSearch')->name('products.search');
 Route::get('/products/by_firm{id}', 'PagesController@getProductsByFirm')->name('products.by_firm');
+Route::get('/products/by_category{id}', 'PagesController@getProductsByCategory')->name('products.by_category');
 Route::post('/contact/submit', 'MessagesController@submit');
 Route::get('/firms', 'PagesController@getFirms');
 Route::get('/product', 'PagesController@getProduct');
