@@ -18,7 +18,7 @@ class UsersController extends Controller
 		$user->email = $request->input('email');
 		$user->phone = $request->input('phone');
 		$user->city = $request->input('city');
-		$user->postalcod = $request->input('postalcod');
+		$user->postalcod = substr($request->input('postalcod'), 0, 4);
 		$user->address = $request->input('address');
 		if ($request->input('isfirma') != NULL){
 			$user->isfirma = 'Yes';
