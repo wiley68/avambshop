@@ -52,7 +52,7 @@
             <label for="postalcod" class="col-sm-4 col-form-label">Пощенски код</label>
 
             <div class="col-sm-8">
-                <input id="postalcod" type="text" maxlength="4" class="form-control" name="postalcod" value="{{ Auth::user()->postalcod }}">
+                <input id="postalcod" type="text" maxlength="5" class="form-control" name="postalcod" value="{{ Auth::user()->postalcod }}">
             </div>
         </div>
 

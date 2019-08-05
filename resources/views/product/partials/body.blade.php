@@ -243,23 +243,8 @@
 		<div class="card-body text-secondary">
 			<h5 class="card-title">Спецификация на продукта: {{ $product->name }}</h5>
 			<ul class="list-group list-group-flush">
-				@if($visocina_q != 0)
-				<li class="list-group-item">Височина на продукта: <span id="spec_visocina" class="font-weight-bold"><mark>{{ $visocina_q }}</mark> mm</span></li>
-				@endif
-				@if($dalzina_q != 0)
-				<li class="list-group-item">Дължина на продукта: <span id="spec_dalzina" class="font-weight-bold"><mark>{{ $dalzina_q }}</mark> mm</span></li>
-				@endif
-				@if($shirina_q != 0)
-				<li class="list-group-item">Ширина на продукта: <span id="spec_shirina" class="font-weight-bold"><mark>{{ $shirina_q }}</mark> mm</span></li>
-				@endif
-				@if($visocina_q != 0 AND $dalzina_q != 0)
-				<li class="list-group-item">Квадратура на продукта: <span id="spec_kvadratura" class="font-weight-bold"><mark>{{ $visocina_q/1000 * $dalzina_q/1000 }}</mark> m<sup>2</sup></span></li>
-				@endif
-				@if($visocina_q != 0 AND $dalzina_q != 0 AND $shirina_q != 0)
-				<li class="list-group-item">Кубатура на продукта: <span id="spec_kubatura" class="font-weight-bold"><mark>{{ $visocina_q/1000 * $dalzina_q/1000 * $shirina_q/1000 }}</mark> m<sup>3</sup></span></li>
-				@endif
-				<li class="list-group-item">Тегло на продукта: <span id="spec_teglo" class="font-weight-bold"><mark>{{ $shirina_q }}</mark> mm</span></li>
-				<li class="list-group-item">Ценова листа за продукта: </li>
+				<!--<li class="list-group-item">Тегло на продукта: <span id="spec_teglo" class="font-weight-bold"><mark></mark> кг.</span></li>-->
+				<li class="list-group-item">Можете да изтеглите спецификация на продукта от тук: <a href="#" target="_blank" class="btn btn-primary text-uppercase"> ИЗТЕГЛИ СПЕЦИФИКАЦИЯ </a></li>
 			</ul>						
 		</div>
 		<hr />
