@@ -243,8 +243,20 @@
 		<div class="card-body text-secondary">
 			<h5 class="card-title">Спецификация на продукта: {{ $product->name }}</h5>
 			<ul class="list-group list-group-flush">
-				<!--<li class="list-group-item">Тегло на продукта: <span id="spec_teglo" class="font-weight-bold"><mark></mark> кг.</span></li>-->
-				<li class="list-group-item">Можете да изтеглите спецификация на продукта от тук: <a href="#" target="_blank" class="btn btn-primary text-uppercase"> ИЗТЕГЛИ СПЕЦИФИКАЦИЯ </a></li>
+                @if ($firm1->first()->isspec > 0)
+                    @if ($product->spec1 > 0)
+                        <li class="list-group-item">Можете да изтеглите спецификация на продукта от тук, Документ 1: <a href="{{ env('APP_SITE') }}/dist/img/specifikacii/spec1_{{ $product->code }}.pdf" target="_blank" class="btn btn-sm btn-primary text-uppercase"> ИЗТЕГЛИ СПЕЦИФИКАЦИЯ </a></li>
+                    @endif
+                    @if ($product->spec2 > 0)
+                        <li class="list-group-item">Можете да изтеглите спецификация на продукта от тук, Документ 2: <a href="{{ env('APP_SITE') }}/dist/img/specifikacii/spec2_{{ $product->code }}.pdf" target="_blank" class="btn btn-sm btn-primary text-uppercase"> ИЗТЕГЛИ СПЕЦИФИКАЦИЯ </a></li>
+                    @endif
+                    @if ($product->spec3 > 0)
+                        <li class="list-group-item">Можете да изтеглите спецификация на продукта от тук, Документ 3: <a href="{{ env('APP_SITE') }}/dist/img/specifikacii/spec3_{{ $product->code }}.pdf" target="_blank" class="btn btn-sm btn-primary text-uppercase"> ИЗТЕГЛИ СПЕЦИФИКАЦИЯ </a></li>
+                    @endif
+                    @if ($product->spec4 > 0)
+                        <li class="list-group-item">Можете да изтеглите спецификация на продукта от тук, Документ 4: <a href="{{ env('APP_SITE') }}/dist/img/specifikacii/spec4_{{ $product->code }}.pdf" target="_blank" class="btn btn-sm btn-primary text-uppercase"> ИЗТЕГЛИ СПЕЦИФИКАЦИЯ </a></li>
+                    @endif
+                @endif
 			</ul>						
 		</div>
 		<hr />
