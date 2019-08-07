@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Weborder;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
@@ -24,6 +26,28 @@ class PagesController extends Controller
 
 	public function getProfile(){
 		return view('profile');
+    }
+    
+    public function getOrders(){
+        $user = Auth::user();
+        $orders = Weborder::where(['user_id' => $user->id])->orderBy('id', 'DESC')->get();
+        $properties = PropertiesController::getAllProperties()->first();
+		return view('orders')->with([
+            'orders' => $orders,
+            'properties' => $properties
+		]);
+    }
+    
+    public function getUserOrder(Request $request, $id=null){
+        $user = Auth::user();
+        if ($id != null){
+            $order = Weborder::where(['id' => $id])->first();
+            $properties = PropertiesController::getAllProperties()->first();
+            return view('user_order')->with([
+                'order' => $order,
+                'properties' => $properties
+            ]);    
+        }
 	}
 
 	public function getTerms(){

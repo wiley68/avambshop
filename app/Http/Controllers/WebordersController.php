@@ -7,6 +7,7 @@ use App\Weborder;
 use App\Subweborder;
 use App\Mail\OrderEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class WebordersController extends Controller
 {
@@ -126,6 +127,19 @@ class WebordersController extends Controller
         }
 		
 		return view('orders/ok', ['orders' => $orders]);
+    }
+    
+    public function deleteOrder(Request $request, $id=null){
+        $user = Auth::user();
+        if (($id != null) && (!empty($user))){
+            Weborder::where(['id' => $id])->where(['user_id' => $user->id])->delete();
+            $orders = Weborder::where(['user_id' => $user->id])->orderBy('id', 'DESC')->get();
+            $properties = PropertiesController::getAllProperties()->first();
+            return view('orders')->with([
+                'orders' => $orders,
+                'properties' => $properties
+            ]); 
+        }
 	}
 	
 }
