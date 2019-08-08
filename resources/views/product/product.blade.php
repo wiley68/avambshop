@@ -2,6 +2,7 @@
 <?php use App\Http\Controllers\PropertiesController;?>
 <?php use App\Http\Controllers\WebsettingsController;?>
 <?php use App\Http\Controllers\FirmsController;?>
+<?php use App\Subproduct; ?>
 @extends('layouts/app')
 
 @section('content')
@@ -10,7 +11,8 @@
     $properties = PropertiesController::getAllProperties();
     $settings = WebsettingsController::getAllSettings();
 	$products = ProductsController::getProductsByFirmRandom($product->firm_id, $product->code, 4);
-	$firm1 = FirmsController::getFirmById($product->firm_id);
+    $firm1 = FirmsController::getFirmById($product->firm_id);
+    $subproducts = Subproduct::where(['products_code' => $product->code])->get();
 ?>
 <div calss="row">
 	<div class="container">
