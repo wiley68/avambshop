@@ -1,3 +1,13 @@
+<script>
+function changeGalleryPicture(url, code, picnomber){
+    $('#product_image').css("background-image", "url("+url+"/dist/img/gallery_product/gallery"+picnomber+"_"+code+".jpg)");
+    $('#product_image_body').css("background-image", "url("+url+"/dist/img/gallery_product/gallery"+picnomber+"_"+code+".jpg)");
+};
+function changeGalleryPictureFirst(url, code){
+    $('#product_image').css("background-image", "url("+url+"/dist/img/products/product_"+code+".jpg)");
+    $('#product_image_body').css("background-image", "url("+url+"/dist/img/products/product_"+code+".jpg)");
+};
+</script>
 <?php use App\Http\Controllers\FirmsController;?>
 <?php
 	$shirina = "";
@@ -117,7 +127,7 @@
 		<aside class="col-sm-5 border-right">
 			<article class="gallery-wrap"> 
 				<a href="#" data-toggle="modal" data-target="#modalPicture">
-					<div class="img-big-wrap" style="background-image:url({{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, -4) }}.jpg);">
+					<div id="product_image" class="img-big-wrap" style="background-image:url({{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, -4) }}.jpg);">
 					</div> <!-- slider-product.// -->
 				</a>
 				<div class="modal fade" id="modalPicture" tabindex="-1" role="dialog" aria-labelledby="productName" aria-hidden="true">
@@ -130,14 +140,28 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<div class="img-big-wrap" style="background-image:url({{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, -4) }}.jpg)"></div>
+								<div id="product_image_body" class="img-big-wrap" style="background-image:url({{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, -4) }}.jpg)"></div>
 							</div>
 						</div>
 					</div>
 				</div>	
 				<hr />
 				<div class="img-small-wrap">
-					<div class="item-gallery"> <img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, -4) }}.jpg" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'"> </div>
+                    <div class="item-gallery"> <img onclick="changeGalleryPictureFirst('{{ env('APP_SITE') }}', '{{ substr($product->code, -4) }}');" src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, -4) }}.jpg" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'"> </div>
+                    @if ($firm1->first()->isspec > 0)
+                        @if ($product->gallery1 != 0)
+                        <div class="item-gallery"> <img onclick="changeGalleryPicture('{{ env('APP_SITE') }}', '{{ $product->code }}', '1');" src="{{ env('APP_SITE') }}/dist/img/gallery_product/gallery1_{{ $product->code }}.jpg" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'"> </div>
+                        @endif
+                        @if ($product->gallery2 != 0)
+                        <div class="item-gallery"> <img onclick="changeGalleryPicture('{{ env('APP_SITE') }}', '{{ $product->code }}', '2');" src="{{ env('APP_SITE') }}/dist/img/gallery_product/gallery2_{{ $product->code }}.jpg" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'"> </div>
+                        @endif
+                        @if ($product->gallery3 != 0)
+                        <div class="item-gallery"> <img onclick="changeGalleryPicture('{{ env('APP_SITE') }}', '{{ $product->code }}', '3');" src="{{ env('APP_SITE') }}/dist/img/gallery_product/gallery3_{{ $product->code }}.jpg" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'"> </div>
+                        @endif
+                        @if ($product->gallery4 != 0)
+                        <div class="item-gallery"> <img onclick="changeGalleryPicture('{{ env('APP_SITE') }}', '{{ $product->code }}', '4');" src="{{ env('APP_SITE') }}/dist/img/gallery_product/gallery4_{{ $product->code }}.jpg" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'"> </div>
+                        @endif
+                    @endif
 				</div> <!-- slider-nav.// -->
 			</article> <!-- gallery-wrap .end// -->
 		</aside>
