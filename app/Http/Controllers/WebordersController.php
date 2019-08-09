@@ -8,6 +8,7 @@ use App\Subweborder;
 use App\Mail\OrderEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use App\Firm;
 
 class WebordersController extends Controller
 {
@@ -116,8 +117,11 @@ class WebordersController extends Controller
 			$objMailAdmin->sender = env('MAIL_USERNAME','AVAMB Logiciel');
             $objMailAdmin->receiver = 'Администратор AVAMB Logiciel';
             $objMailAdmin->isadmin = 'Yes';
+
+            //to mail
+            $firm_mail = Firm::where(['id' => $order->firm_id])->first()->firm_mail;
  
-			Mail::to(env('MAIL_USERNAME','home@avalonbg.com'))->send(new OrderEmail($objMailAdmin));
+			Mail::to($firm_mail)->send(new OrderEmail($objMailAdmin));
 			
 			$order_number++;
 		}
