@@ -10,6 +10,7 @@
 @guest
 {{!! redirect()->route('login'); !!}}
 @else
+<div id="print_div">
 <h1>Поръчка №: {{ $order->id }}</h1>
 <hr />
 <div class="card">
@@ -116,6 +117,10 @@
             <td>{{ number_format($suborder->price / $suborder->quantity, 2, ".", "") }}&nbsp;{{ $properties->currency }}</td>
             <td>{{ number_format($suborder->price, 2, ".", "") }}&nbsp;{{ $properties->currency }}</td>
         </tr>                
+        <tr>
+            <td>Описание</td>
+            <td colspan="4">{!! $product->description !!}</td>
+        </tr>                
         @endforeach
     </tbody>
     <tfoot>
@@ -128,8 +133,36 @@
         </tr>
     </tfoot>
 </table>
+</div>
 <hr />
 <a href="/orders" class="btn btn-info">Обратно в моите поръчки</a>
+<button id="print_order" class="btn btn-info">Принтирай</button>
 @endguest
 
 @endsection
+
+@section('scripts')
+<script>
+function PrintElem(elem)
+{
+    var mywindow = window.open('', 'PRINT');
+
+    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h1>' + document.title  + '</h1>');
+    mywindow.document.write(document.getElementById(elem).innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+$("#print_order").click(function(e){
+    PrintElem('print_div');
+});
+</script>
+@stop
