@@ -47,11 +47,11 @@ function buyOption (real_price, productName, product_typeprice, product_descript
 <?php use App\Http\Controllers\FirmsController;?>
 <?php
 	$shirina = "";
-	$shirina_q = 70;
+	$shirina_q = 0;
 	$dalzina = "";
-	$dalzina_q = 1000;
+	$dalzina_q = 0;
 	$visocina = "";
-	$visocina_q = 1000;
+	$visocina_q = 0;
 	$quantity = "";
 	switch ($product->typeprice) {
 		case '0':
@@ -148,11 +148,11 @@ function buyOption (real_price, productName, product_typeprice, product_descript
 	$response_body = curl_exec($ch);
     curl_close($ch);
     //with or without dds
-    if ($settings[0]->dds == 'Yes'){
-        $real_price = floatval(json_decode($response_body)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
-    }else{
+    //if ($settings[0]->dds == 'Yes'){
+    //    $real_price = floatval(json_decode($response_body)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
+    //}else{
         $real_price = floatval(json_decode($response_body)->new_price);
-    }
+    //}
 	$real_kg = floatval(json_decode($response_body)->new_kg);
 ?>
 <div id="message_div" class="alert alert-success" role="alert"></div>
@@ -275,7 +275,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                     </div>
                     <div class="col-sm-2">
                         <dl class="param param-inline">
-                            <dt>Вис.</dt>
+                            <dt>Вис.(H)</dt>
                             <dd>
                                 <input id="h" class="form-control text-primary" {{ $visocina }}
                                     style="width:84px;font-size:20px;font-weight:bold;" type="text"
@@ -286,7 +286,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                     </div>
                     <div class="col-sm-2">
                         <dl class="param param-inline">
-                            <dt>Дъл.</dt>
+                            <dt>Дъл.(L)</dt>
                             <dd>
                                 <input id="l" class="form-control text-primary" {{ $dalzina }}
                                     style="width:84px;font-size:20px;font-weight:bold;" type="text"
@@ -297,7 +297,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                     </div>
                     <div class="col-sm-2">
                         <dl class="param param-inline">
-                            <dt>Шир.</dt>
+                            <dt>Шир.(P)</dt>
                             <dd>
                                 <input id="p" class="form-control text-primary" {{ $shirina }}
                                     style="width:84px;font-size:20px;font-weight:bold;" type="text"

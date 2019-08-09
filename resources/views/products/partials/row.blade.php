@@ -16,11 +16,11 @@
 		$response_body_0 = curl_exec($ch);
 		curl_close($ch);
         //with or without dds
-        if ($settings[0]->dds == 'Yes'){
-            $real_price_0 = floatval(json_decode($response_body_0)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
-        }else{
+        //if ($settings[0]->dds == 'Yes'){
+        //    $real_price_0 = floatval(json_decode($response_body_0)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
+        //}else{
             $real_price_0 = floatval(json_decode($response_body_0)->new_price);
-        }
+        //}
 		$real_kg_0 = floatval(json_decode($response_body_0)->new_kg);
 	}
 	if (array_key_exists(1, $product)){
@@ -34,11 +34,11 @@
 		$response_body_1 = curl_exec($ch);
 		curl_close($ch);
         //with or without dds
-        if ($settings[0]->dds == 'Yes'){
-            $real_price_1 = floatval(json_decode($response_body_1)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
-        }else{
+        //if ($settings[0]->dds == 'Yes'){
+        //    $real_price_1 = floatval(json_decode($response_body_1)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
+        //}else{
             $real_price_1 = floatval(json_decode($response_body_1)->new_price);
-        }
+        //}
 		$real_kg_1 = floatval(json_decode($response_body_1)->new_kg);
 	}
 	if (array_key_exists(2, $product)){

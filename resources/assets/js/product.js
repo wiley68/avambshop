@@ -5,13 +5,13 @@ function changePrice() {
     var l = $("#l").val();
     var real_kg = $("#real_kg").val();
     if (h == '') {
-        h = 1000;
+        h = 0;
     }
     if (l == '') {
-        l = 1000;
+        l = 0;
     }
     if (p == '') {
-        p = 70;
+        p = 0;
     }
     $.ajax({
         type: 'GET',
