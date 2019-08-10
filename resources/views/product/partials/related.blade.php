@@ -16,8 +16,10 @@
     //with or without dds
     if ($settings[0]->dds == 'Yes'){
         $real_price = floatval(json_decode($response_body)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
-    }else{
-        $real_price = floatval(json_decode($response_body)->new_price);
+		$dds_text = '(цена с ДДС)';
+	}else{
+		$real_price = floatval(json_decode($response_body)->new_price);
+		$dds_text = '(цена без ДДС)';
     }
 ?>
 	<?php $firm1 = FirmsController::getFirmById($product->firm_id);?> 
@@ -37,7 +39,7 @@
 		</ul>
 		<div class="card-footer">
 			@if($product->real_price != '0.00')
-				<h5 class="font-weight-bold float-right">{{ number_format($real_price, 2, ".", "") }} <small class="text-muted">{{ $properties[0]->currency }}&nbsp;@if($settings[0]->dds == 'No'){{ $settings[0]->text }}@endif</small></h5>
+			<h5 class="font-weight-bold float-right">{{ number_format($real_price, 2, ".", "") }} <small class="text-muted">{{ $properties[0]->currency }}&nbsp;{{ $dds_text }}</small></h5>
 			@endif
 		</div>
 	</div>
