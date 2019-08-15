@@ -127,11 +127,11 @@ function buyOption (real_price, productName, product_typeprice, product_descript
 		$visocina_q = 0;
 		break;
 		case 'f':
-		$typeprice = _('конфигурация');
+		$typeprice = 'конфигурация';
 		$quantity = "disabled";
 		break;
 		case 't':
-		$typeprice = _('конфигурация');
+		$typeprice = 'конфигурация';
 		$shirina = "disabled";
 		$shirina_q = 0;
 		$quantity = "disabled";
@@ -267,9 +267,10 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                                             style="width:84px;font-size:28px;font-weight:bold;" type="text"
                                             onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="1" />
                                     </div>
-                                    <div id="product_typeprice" class="col text-left d-flex align-items-end">
+                                    <div class="col text-left d-flex align-items-end">
                                         {{ $typeprice }}
                                     </div>
+                                    <input type="hidden" id="product_typeprice" value="{{ $product->typeprice }}">
                                 </div>
                             </dd>
                         </dl>

@@ -51,7 +51,7 @@ $("#btn_buy").click(function () {
             total_price: $("#real_price").html(),
             product_name: $("#productName").html(),
             product_quantity: $("#product_quantity").val(),
-            product_typeprice: $("#product_typeprice").text(),
+            product_typeprice: $("#product_typeprice").val(),
             product_description: $("#product_description dd:first p").text(),
             product_currency: $("#product_currency em").text(),
             product_code: $("#product_code dd:first").text(),
