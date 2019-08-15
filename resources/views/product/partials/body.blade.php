@@ -38,7 +38,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
             }
             window.scrollTo(0, 0);
             $("#message_div").show("slow", function () {
-                $("#message_div").html("Успешно добавихте продукта. Можете да продължите с разглеждането на магазина ни, или да закупите продуктите във вашата <a href='/cart' title='Вижте съдържанието на Вашата Количка.'>Количка</a>.");
+                $("#message_div").html("Успешно добавихте продукта. Можете да продължите с разглеждането на <a href='/' title='Онлайн магазин AVAMB.'>магазина</a> ни, или да закупите продуктите във вашата <a href='/cart' title='Вижте съдържанието на Вашата Количка.'>Количка</a>.");
             });
         }
     });
