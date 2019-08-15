@@ -32,8 +32,38 @@ function deliverieMethodsMouseUp(radioname){
 <input type="hidden" id="firmaddress_if" value="<?php echo (isset($currentUser)) ? $currentUser->firmaddress : ''; ?>" />
 <input type="hidden" id="mol_if" value="<?php echo (isset($currentUser)) ? $currentUser->mol : ''; ?>" />
 <h1><em>Поръчка</em></h1>
+
+@php
+    $product_typeprice = false;
+@endphp
+@if (isset($cart_session) AND sizeof($cart_session['firms']) > 0)
+@foreach($cart_session['firms'] as $firm)
+@if (sizeof($firm['items']) > 0)
+    @php
+        foreach ($firm['items'] as $item) {
+            if (($item['product_typeprice'] == 'f') || ($item['product_typeprice'] == 't')){
+                $product_typeprice = true;
+            }
+        }
+    @endphp
+@endif
+@endforeach
+    @if ($product_typeprice)
+        <input type="hidden" id="product_typeprice" value="1">
+        <hr />
+        <p style="color:red;font-weight:bold;font-size:18px;">Внимание!!!</p>
+        <p style="color:red;font-size:14px;">
+            Вие направихте поръчка в която има продукт, който трябва да се изработи индивидуално за Вас.<br />
+            След приключването и. Служител от фирмата производител ще се свърже с Вас за потвърждаването и.
+        </p>
+        <button type="button" id="btn_ok" class="btn btn-warning">Разбрах</button>
+    @else
+        <input type="hidden" id="product_typeprice" value="0">
+    @endif
+@endif
+
 <hr />
-<div class="container">
+<div class="container" id="order_div">
 	@if (isset($cart_session) AND sizeof($cart_session['firms']) > 0)
 	
 	{!! Form::open(['url' => 'order/submit']) !!} 
@@ -276,4 +306,14 @@ function deliverieMethodsMouseUp(radioname){
 
 @section('scripts')
     <script src="{{ asset('/js/order.js') }}"></script>
+    <script>
+        if ($("#product_typeprice").val() == "1"){
+            $("#order_div").hide();
+        }else{
+            $("#order_div").show();
+        }
+        $("#btn_ok").click(function(){
+            $("#order_div").show();
+        });
+    </script>
 @stop
