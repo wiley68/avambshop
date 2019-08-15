@@ -32,7 +32,11 @@ class ProductsController extends Controller
 
 	public static function getProductsByTermin($termin){
 		$firms_id = FirmsController::getFirmsByIsshop();
-		$products = Product::whereIn('firm_id', $firms_id)->where('name', 'like', '%'.$termin.'%')->where('isshop', '>', 0)->paginate(9);
+		$products = Product::whereIn('firm_id', $firms_id)
+			->where('name', 'like', '%'.$termin.'%')
+			->orWhere('code', 'like', '%'.$termin.'%')
+			->where('isshop', '>', 0)
+			->paginate(9);
 		return $products;
 	}
 

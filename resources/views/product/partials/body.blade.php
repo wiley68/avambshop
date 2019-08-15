@@ -148,11 +148,13 @@ function buyOption (real_price, productName, product_typeprice, product_descript
 	$response_body = curl_exec($ch);
     curl_close($ch);
     //with or without dds
-    //if ($settings[0]->dds == 'Yes'){
-    //    $real_price = floatval(json_decode($response_body)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
-    //}else{
+    if ($settings[0]->dds == 'Yes'){
+        $real_price = floatval(json_decode($response_body)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
+        $dds_text = '(цена с ДДС)';
+    }else{
         $real_price = floatval(json_decode($response_body)->new_price);
-    //}
+        $dds_text = '(цена без ДДС)';
+    }
 	$real_kg = floatval(json_decode($response_body)->new_kg);
 ?>
 <div id="message_div" class="alert alert-success" role="alert"></div>
@@ -233,8 +235,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                         <span id="real_price" class="font-weight-bold text-primary"
                             style="font-style:italic;">{{ number_format($real_price, 2, ".", "") }}</span> <span
                             id="product_currency" class="text-primary"
-                            style="font-size:65%;"><em>{{ $properties[0]->currency }}&nbsp;@if($settings[0]->dds ==
-                                'No'){{ $settings[0]->text }}@endif</em></span>
+                            style="font-size:65%;"><em>{{ $properties[0]->currency }}&nbsp;{{ $dds_text }}</em></span>
                     </span>
                 </p>
 
@@ -453,10 +454,11 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                     curl_close($ch);
                     //with or without dds
                     if ($settings[0]->dds == 'Yes'){
-                    $real_price = floatval(json_decode($response_body)->new_price) * ( 1.00 +
-                    floatval($settings[0]->ddspurcent) / 100);
+                        $real_price = floatval(json_decode($response_body)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
+                        $dds_text = '(цена с ДДС)';
                     }else{
-                    $real_price = floatval(json_decode($response_body)->new_price);
+                        $real_price = floatval(json_decode($response_body)->new_price);
+                        $dds_text = '(цена без ДДС)';
                     }
                     $real_kg = floatval(json_decode($response_body)->new_kg);
                     @endphp
@@ -469,7 +471,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                                 title="{{ $subproduct->name }}">{{ $subproduct->code }}</a></td>
                         <td><a href="/product?pid={{ $subproduct->code }}"
                                 title="{{ $subproduct->name }}">{{ $subproduct->name }}</a></td>
-                        <td>{{ number_format($real_price, 2, ".", "") }}&nbsp;{{ $properties[0]->currency }}</td>
+                        <td>{{ number_format($real_price, 2, ".", "") }}&nbsp;{{ $properties[0]->currency }}&nbsp;{{ $dds_text }}</td>
                         <td><button class="btn btn-primary text-uppercase"
                             onclick="buyOption('{{ number_format($real_price, 2, '.', '') }}', '{{ $subproduct->name }}', '{{ $subproduct->typeprice }}', '{{ $subproduct->description }}', '{{ $properties[0]->currency }}', '{{ $subproduct->code }}', '{{ $visocina_q }}', '{{ $dalzina_q }}', '{{ $shirina_q }}', '{{ $real_kg }}', '{{ $subproduct->firm_id }}');"
                             > КУПИ </button></td>

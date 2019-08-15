@@ -16,11 +16,13 @@
 		$response_body_0 = curl_exec($ch);
 		curl_close($ch);
         //with or without dds
-        //if ($settings[0]->dds == 'Yes'){
-        //    $real_price_0 = floatval(json_decode($response_body_0)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
-        //}else{
-            $real_price_0 = floatval(json_decode($response_body_0)->new_price);
-        //}
+        if ($settings[0]->dds == 'Yes'){
+            $real_price_0 = floatval(json_decode($response_body_0)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
+			$dds_text_0 = '(цена с ДДС)';
+		}else{
+			$real_price_0 = floatval(json_decode($response_body_0)->new_price);
+			$dds_text_0 = '(цена без ДДС)';
+        }
 		$real_kg_0 = floatval(json_decode($response_body_0)->new_kg);
 	}
 	if (array_key_exists(1, $product)){
@@ -34,11 +36,13 @@
 		$response_body_1 = curl_exec($ch);
 		curl_close($ch);
         //with or without dds
-        //if ($settings[0]->dds == 'Yes'){
-        //    $real_price_1 = floatval(json_decode($response_body_1)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
-        //}else{
-            $real_price_1 = floatval(json_decode($response_body_1)->new_price);
-        //}
+        if ($settings[0]->dds == 'Yes'){
+            $real_price_1 = floatval(json_decode($response_body_1)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
+			$dds_text_1 = '(цена с ДДС)';
+		}else{
+			$real_price_1 = floatval(json_decode($response_body_1)->new_price);
+			$dds_text_1 = '(цена без ДДС)';
+        }
 		$real_kg_1 = floatval(json_decode($response_body_1)->new_kg);
 	}
 	if (array_key_exists(2, $product)){
@@ -54,8 +58,10 @@
         //with or without dds
         if ($settings[0]->dds == 'Yes'){
             $real_price_2 = floatval(json_decode($response_body_2)->new_price) * ( 1.00 + floatval($settings[0]->ddspurcent) / 100);
-        }else{
-            $real_price_2 = floatval(json_decode($response_body_2)->new_price);
+			$dds_text_2 = '(цена с ДДС)';
+		}else{
+			$real_price_2 = floatval(json_decode($response_body_2)->new_price);
+			$dds_text_2 = '(цена без ДДС)';
         }
 		$real_kg_2 = floatval(json_decode($response_body_2)->new_kg);
 	}
@@ -120,7 +126,7 @@
 				<a href="#" class="btn btn-outline-info float-left shadow-sm">Запитай</a>				
 			@else
 				<button name="btn_buy" id="{{ $product[0]->code }}" class="btn btn-primary float-left shadow-sm">Купи</button>
-				<h5 class="font-weight-bold float-right"><span id="real_price_{{ $product[0]->code }}">{{ number_format($real_price_0, 2, ".", "") }}</span> <span style="font-size: 10px;" class="text-muted">{{ $properties[0]->currency }}&nbsp;@if($settings[0]->dds == 'No'){{ $settings[0]->text }}@endif</span></h5>
+				<h5 class="font-weight-bold float-right"><span id="real_price_{{ $product[0]->code }}">{{ number_format($real_price_0, 2, ".", "") }}</span> <span style="font-size: 10px;" class="text-muted">{{ $properties[0]->currency }}&nbsp;{{ $dds_text_0 }}</span></h5>
 			@endif
 		</div>
 	</div>
@@ -184,7 +190,7 @@
 				<a href="#" class="btn btn-outline-info float-left shadow-sm">Запитай</a>				
 			@else
 				<button name="btn_buy" id="{{ $product[1]->code }}" class="btn btn-primary float-left shadow-sm">Купи</button>
-				<h5 class="font-weight-bold float-right"><span id="real_price_{{ $product[1]->code }}">{{ number_format($real_price_1, 2, ".", "") }}</span> <span style="font-size: 10px;" class="text-muted">{{ $properties[0]->currency }}&nbsp;@if($settings[0]->dds == 'No'){{ $settings[0]->text }}@endif</span></h5>
+				<h5 class="font-weight-bold float-right"><span id="real_price_{{ $product[1]->code }}">{{ number_format($real_price_1, 2, ".", "") }}</span> <span style="font-size: 10px;" class="text-muted">{{ $properties[0]->currency }}&nbsp;{{ $dds_text_1 }}</span></h5>
 			@endif
 		</div>
 	</div>
@@ -251,7 +257,7 @@
 				<a href="#" class="btn btn-outline-info float-left shadow-sm">Запитай</a>				
 			@else
 				<button name="btn_buy" id="{{ $product[2]->code }}" class="btn btn-primary float-left shadow-sm">Купи</button>
-				<h5 class="font-weight-bold float-right"><span id="real_price_{{ $product[2]->code }}">{{ number_format($real_price_2, 2, ".", "") }}</span> <span style="font-size: 10px;" class="text-muted">{{ $properties[0]->currency }}&nbsp;@if($settings[0]->dds == 'No'){{ $settings[0]->text }}@endif</span></h5>
+				<h5 class="font-weight-bold float-right"><span id="real_price_{{ $product[2]->code }}">{{ number_format($real_price_2, 2, ".", "") }}</span> <span style="font-size: 10px;" class="text-muted">{{ $properties[0]->currency }}&nbsp;{{ $dds_text_2 }}</span></h5>
 			@endif
 		</div>
 	</div>
