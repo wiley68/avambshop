@@ -60,7 +60,10 @@
 			@foreach($order['suborder'] as $item)
 			<li class="list-group-item">
 				<div class="row">
-					<div class="col-md-6">{{ProductsController::getProductById($item['product_code'])->name}} <strong>x {{$item['quantity']}}</strong></div>
+					<div class="col-md-6">
+                        {{ProductsController::getProductById($item['product_code'])->name}} <strong>x {{$item['quantity']}}</strong><br />
+                        {!! html_entity_decode(ProductsController::getProductById($item['product_code'])->description) !!}
+                    </div>
 					<div class="col-md-6">{{number_format($item['price'], 2, ".", "")}} {{$properties[0]->currency}}</div>
 				</div>
 			</li>
