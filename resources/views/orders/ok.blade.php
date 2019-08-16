@@ -14,6 +14,7 @@
 <hr />
 <p>Благодарности. Вашата поръчка беше получена.</p>
 @foreach ($orders as $order)
+<div id="print_div_{{ $order['order']->id }}">
 <div class="row">
 	<div class="col-md-2" style="border-right: 1px dashed #DCDCDC;">
 		<div class="small text-muted">НОМЕР НА ПОРЪЧКАТА:</div>
@@ -46,7 +47,7 @@
 <div class="row">
 	<div class="col-md-12">
 	<div class="card bg-default mb-3">
-		<div class="card-header">Вашата поръчка от фирма: {{FirmsController::getFirmById($order['order']->firm_id)[0]->firm}}</div>
+        <div class="card-header">Вашата поръчка от фирма: {{FirmsController::getFirmById($order['order']->firm_id)[0]->firm}}&nbsp;(<a href="#" onclick="printOrder(event, '{{ $order['order']->id }}');">Принтирай поръчката</a>)</div>
 		<ul class="list-group list-group-flush">
 			<li class="list-group-item">
 				<div class="row">
@@ -109,7 +110,32 @@
 </div>
 <hr />
 <div style="padding-bottom:30px;"></div>
+</div>
 @endforeach
 <h3>Ще се свържем с Вас за потвърждение на поръчката.</h3>
 @endif
 @endsection
+
+@section('scripts')
+<script>
+function printOrder(e, order)
+{
+    e.preventDefault();
+    var mywindow = window.open('', 'PRINT');
+
+    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h1>' + document.title  + '</h1>');
+    mywindow.document.write(document.getElementById("print_div_"+order).innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+</script>
+@stop

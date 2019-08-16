@@ -120,9 +120,12 @@ class WebordersController extends Controller
 
             //to mail
             $firm_mail = Firm::where(['id' => $order->firm_id])->first()->firm_mail;
- 
-			Mail::to($firm_mail)->send(new OrderEmail($objMailAdmin));
-			
+            if (filter_var($firm_mail, FILTER_VALIDATE_EMAIL)) {
+                Mail::to($firm_mail)->send(new OrderEmail($objMailAdmin));
+            } else {
+                Mail::to(env('MAIL_USERNAME','ilko.iv@gmail.com'))->send(new OrderEmail($objMailAdmin));
+            }
+		
 			$order_number++;
 		}
 		//generate orders
