@@ -3,6 +3,8 @@
 <?php use App\Subweborder; ?>
 <?php use App\Subdeliverie; ?>
 <?php use App\Product; ?>
+<?php use App\Http\Controllers\WebsettingsController;?>
+<?php $settings = WebsettingsController::getAllSettings(); ?>
 @extends('layouts/app')
 
 @section('content')
@@ -11,7 +13,7 @@
 {{!! redirect()->route('login'); !!}}
 @else
 <div id="print_div">
-<h1>Поръчка №: {{ $order->id }}</h1>
+<h1>Оферта №: {{ $order->id }}&nbsp;от фирма {{ $firm->firm }}</h1>
 <hr />
 <div class="card">
     <div class="card-header">
@@ -75,19 +77,20 @@
                         @endphp
                         <td>{{ $delivery->name }}&nbsp;+({{ $deliveryprice }}&nbsp;{{ $properties->currency }})</td>
                 </tr>
-                <td>Дата и час</td>
-                @php
-                $newDate = date("d.m.Y H:s:i", strtotime($order->dateon));
-                @endphp
-                <td>{{ $newDate }}</td>
-                </tr>
                 <tr>
                     <td>Описание</td>
                     <td>{!! $order->description !!}</td>
                 </tr>
                 <tr>
                     <td>Крайна цена</td>
-                    <td>{{ number_format($order->allprice + $deliveryprice, 2, ".", "") }}&nbsp;{{ $properties->currency }}</td>
+                    @php
+                    if ($settings[0]->dds == 'Yes'){
+                        $dds_text = '(цена с ДДС)';
+                    }else{
+                        $dds_text = '(цена без ДДС)';
+                    }                        
+                    @endphp
+                    <td>{{ number_format($order->allprice + $deliveryprice, 2, ".", "") }}&nbsp;{{ $properties->currency }}&nbsp;<strong>{{ $dds_text }}</strong></td>
                 </tr>
             </tbody>
         </table>
@@ -123,16 +126,9 @@
         </tr>                
         @endforeach
     </tbody>
-    <tfoot>
-        <tr>
-            <th class="th-sm">Продуктов код</th>
-            <th class="th-sm">Продукт</th>
-            <th class="th-sm">Кол.</th>
-            <th class="th-sm">Ед. цена</th>
-            <th class="th-sm">Крайна цена</th>
-        </tr>
-    </tfoot>
 </table>
+<hr />
+Крайна цена {{ number_format($order->allprice + $deliveryprice, 2, ".", "") }}&nbsp;{{ $properties->currency }}&nbsp;<strong>{{ $dds_text }}</strong>
 </div>
 <hr />
 <a href="/orders" class="btn btn-info">Обратно в моите поръчки</a>

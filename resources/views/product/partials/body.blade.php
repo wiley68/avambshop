@@ -159,6 +159,8 @@ function buyOption (real_price, productName, product_typeprice, product_descript
 ?>
 <div id="message_div" class="alert alert-success" role="alert"></div>
 <input type="hidden" id="app_site" value="{{ env('APP_SITE') }}" />
+<input type="hidden" id="dds" value="{{ $settings[0]->dds }}">
+<input type="hidden" id="dds_purcent" value="{{ $settings[0]->ddspurcent }}">
 <div class="card">
     <div class="row">
         <!-- pictures -->

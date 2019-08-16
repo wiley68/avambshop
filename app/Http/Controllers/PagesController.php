@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Firm;
 use Illuminate\Http\Request;
 use App\Weborder;
 use Illuminate\Support\Facades\Auth;
@@ -42,10 +43,12 @@ class PagesController extends Controller
         $user = Auth::user();
         if ($id != null){
             $order = Weborder::where(['id' => $id])->first();
+            $firm = Firm::where(['id' => $order->firm_id])->first();
             $properties = PropertiesController::getAllProperties()->first();
             return view('user_order')->with([
                 'order' => $order,
-                'properties' => $properties
+                'properties' => $properties,
+                'firm' => $firm
             ]);    
         }
 	}

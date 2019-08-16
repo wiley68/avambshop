@@ -105,7 +105,12 @@ function changePrice() {
                     product_quantity = 1;
                 }
                 var all_price = parseFloat(msg['new_price']) * product_quantity;
-                $("#real_price").html(all_price.toFixed(2));
+                var dds_purcent = 1.00 + parseFloat($("#dds_purcent").val()) / 100.00;
+                if ($("#dds").val() == 'Yes') {
+                    $("#real_price").html((all_price * dds_purcent).toFixed(2));
+                } else {
+                    $("#real_price").html(all_price.toFixed(2));
+                }
             } else {
                 console.log("Error zerro value");
                 return false;
