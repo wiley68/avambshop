@@ -158,6 +158,7 @@ function deliverieMethodsMouseUp(radioname){
 			<?php $total_price = 0; ?>
 			<?php $total_kg = 0; ?>
 			<?php $price_currency = "лв"; ?>
+
 			@foreach($firm['items'] as $item)
 			<?php
 			if ($item['product_name'] == ""){
@@ -174,6 +175,7 @@ function deliverieMethodsMouseUp(radioname){
 			<?php $total_kg += floatval($item['product_real_kg']) * floatval($item['product_quantity']); ?>
 			<?php $price_currency = $item['product_currency']; ?>
 			@endforeach
+
 			<div class="row">
 				<div class="col-md-6"><strong>Общо</strong></strong></div>
 				<div class="col-md-6"><strong>{{number_format($total_price, 2, ".", "")}} {{$price_currency}}</strong></div>
