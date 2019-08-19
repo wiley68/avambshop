@@ -5,6 +5,10 @@
 @section('content')
 	<?php 
 	$allproducts = ProductsController::getProductsByCategory($category->id); 
+	$description = '';
+	if (!empty($category)){
+		$description = $category->description;
+	}
 	$index = 0;
 	$curindex = 0;
 	foreach ($allproducts as $prod){
@@ -17,6 +21,7 @@
 	?>
 <div calss="row">
 		@include('products.partials.breadcrumb')
+		{!! html_entity_decode($description) !!}
 		@if(isset($products))
 			@each('products.partials.row', $products, 'product', 'products.partials.row-empty')
 		@else
