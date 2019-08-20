@@ -4,7 +4,7 @@
 
 @section('content')
 	<h1>{{ $sitemap->name }}</h1>
-	<p>{{ $sitemap->text }}</p>
+	<p>{!! html_entity_decode($sitemap->text) !!}</p>
 	<hr />
 	<p><a href="/" title="Начална страница">Начална страница</a></p>
 	<p><a href="/about" title="Страница с информация за нас">За нас</a></p>

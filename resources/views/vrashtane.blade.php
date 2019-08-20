@@ -4,5 +4,5 @@
 
 @section('content')
 	<h1>{{ $vrashtane->name }}</h1>
-	<p>{{ $vrashtane->text }}</p>
+	<p>{!! html_entity_decode($vrashtane->text) !!}</p>
 @endsection

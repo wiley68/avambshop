@@ -9,7 +9,7 @@
 	</div>
 	@endif
 	<h1>{{ $contact->name }}</h1>
-	<p>{{ $contact->text }}</p>
+	<p>{!! html_entity_decode($contact->text) !!}</p>
 	<hr />
 	{!! Form::open(['url' => 'contact/submit']) !!}    
 	<div class="form-group">		
