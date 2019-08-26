@@ -1,6 +1,15 @@
 <?php use App\Http\Controllers\WebpaymentsController;?>
 <?php use App\Http\Controllers\FirmsController;?>
 <?php use App\Http\Controllers\ProductsController;?>
+<?php use App\Http\Controllers\WebsettingsController;?>
+<?php $settings = WebsettingsController::getAllSettings(); ?>
+@php
+    if ($settings[0]->dds == 'Yes'){
+        $dds_text = '(цена с ДДС)';
+    }else{
+        $dds_text = '(цена без ДДС)';
+    }                        
+@endphp
 Здравейте <i>{{ $order->receiver }}</i>,
 @if($order->isadmin == 'No')
 <p>Вие направихте поръчка през нашия магазин. {{$order->app_name}}</p>
@@ -12,7 +21,7 @@
 <p><b>Поръчка номер:</b>&nbsp;{{ $order->order_id }}</p>
 <p><b>Направена на:</b>&nbsp;{{ $order->order_date }}</p>
 
-<p><b>Обща стойност на поръчката:</b>&nbsp;{{ $order->allprice }}</p>
+<p><b>Обща стойност на поръчката:</b>&nbsp;{{ $order->allprice }}&nbsp;{{ $dds_text }}</p>
 <p><b>Начин на плащане:</b>&nbsp;{{ WebpaymentsController::getPaymentsById($order->payment)[0]->name }}</p>
 
 @if (WebpaymentsController::getPaymentsById($order->payment)[0]->isbank == 'Yes')
@@ -38,22 +47,16 @@
 	</tr>
 	@endforeach
 	@endif
-	
-	<tr>
-		<td>Междинна сума</td>
-		<td>{{ $order->allprice }}</td>
-	</tr>
 	<tr>
 		<td>Начин на плащане</td>
 		<td>{{ WebpaymentsController::getPaymentsById($order->payment)[0]->name }}</td>
 	</tr>
 	<tr>
-		<td>Общо</td>
+		<td>Обща цена&nbsp;{{ $dds_text }}</td>
 		<td>{{ $order->allprice }}</td>
 	</tr>
 </table>
 </div>
 
-Благодарим Ви,
-<br/>
-<i>{{ $order->sender }}</i>
+Благодарим Ви, за доверието<br />
+Служител от фирма {{ FirmsController::getFirmById($order->firm_id)[0]->firm }} ще се свърже с Вас за уточнение на поръчката.

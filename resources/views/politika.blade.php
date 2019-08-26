@@ -4,5 +4,5 @@
 
 @section('content')
 	<h1>{{ $politika->name }}</h1>
-	<p>{{ $politika->text }}</p>
+	<p>{!! html_entity_decode($politika->text) !!}</p>
 @endsection

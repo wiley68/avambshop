@@ -31,14 +31,17 @@
 	width:120px;
 	height:64px;
 	top:calc(60px);
-	left:0px;
+	left:50%;
 	background-color:#ffffff;
+	border-left:1px solid #f18900;
 	border-top:1px solid #f18900;
 	border-right:1px solid #f18900;
 	border-bottom:1px solid #f18900;
 	color:#FFF;
+	border-top-left-radius:8px;
 	border-top-right-radius:8px;
 	border-bottom-right-radius:8px;
+	border-bottom-left-radius:8px;
 	text-align:left;
 	box-shadow: 2px 2px 3px #999;
 	cursor:pointer;

@@ -6,6 +6,15 @@
 <?php use App\Http\Controllers\SubwebordersController;?>
 <?php use App\Http\Controllers\SubdeliveriesController;?>
 <?php $properties = PropertiesController::getAllProperties();?>
+<?php use App\Http\Controllers\WebsettingsController;?>
+<?php $settings = WebsettingsController::getAllSettings(); ?>
+@php
+    if ($settings[0]->dds == 'Yes'){
+        $dds_text = '(цена с ДДС)';
+    }else{
+        $dds_text = '(цена без ДДС)';
+    }                        
+@endphp
 @extends('layouts/app')
 
 @section('content')
@@ -17,20 +26,20 @@
 <div id="print_div_{{ $order['order']->id }}">
 <div class="row">
 	<div class="col-md-2" style="border-right: 1px dashed #DCDCDC;">
-		<div class="small text-muted">НОМЕР НА ПОРЪЧКАТА:</div>
-		<div><strong>{{$order['order']->id}}</strong></div>
+		<div class="small text-muted"><strong>НОМЕР НА ПОРЪЧКАТА:</strong></div>
+		<div>{{$order['order']->id}}</div>
 	</div>
 	<div class="col-md-2" style="border-right: 1px dashed #DCDCDC;">
-		<div class="small text-muted">ДАТА:</div>
-		<div><strong><?php echo date("d.m.Y H:i:s"); ?></strong></div>	
+		<div class="small text-muted"><strong>ДАТА:</strong></div>
+		<div><?php echo date("d.m.Y H:i:s"); ?></div>	
 	</div>
 	<div class="col-md-2" style="border-right: 1px dashed #DCDCDC;">
-		<div class="small text-muted">ОБЩО:</div>
-		<div><strong>{{number_format($order['order']->allprice, 2, ".", "")}}</strong></div>		
+		<div class="small text-muted"><strong>ОБЩО {{ $dds_text }}:</strong></div>
+		<div>{{number_format($order['order']->allprice, 2, ".", "")}}</div>		
 	</div>
 	<div class="col-md-3">
-		<div class="small text-muted">НАЧИН НА ПЛАЩАНЕ:</div>
-		<div><strong>{{WebpaymentsController::getPaymentsById($order['order']->payment)[0]->name}}</strong></div>
+		<div class="small text-muted"><strong>НАЧИН НА ПЛАЩАНЕ:</strong></div>
+		<div>{{WebpaymentsController::getPaymentsById($order['order']->payment)[0]->name}}</div>
 		@if (WebpaymentsController::getPaymentsById($order['order']->payment)[0]->isbank == 'Yes')
 		<div>{{FirmsController::getFirmById($order['order']->firm_id)[0]->firm}}</div>			
 		<div class="small text-muted">БАНКА: {{WebpaymentsController::getPaymentsById($order['order']->payment)[0]->bank_name}}</div>
@@ -39,8 +48,8 @@
 		@endif
 	</div>
 	<div class="col-md-3">
-		<div class="small text-muted">НАЧИН НА ДОСТАВКА:</div>
-		<div><strong>{{WebdeliveriesController::getDeliveriesById($order['order']->delivery)[0]->name}}</strong></div>			
+		<div class="small text-muted"><strong>НАЧИН НА ДОСТАВКА:</strong></div>
+		<div>{{WebdeliveriesController::getDeliveriesById($order['order']->delivery)[0]->name}}</div>			
 	</div>
 </div>
 <div style="padding-bottom:30px;"></div>
@@ -71,14 +80,8 @@
 			@endforeach
 			<li class="list-group-item">
 				<div class="row">
-					<div class="col-md-6"><strong>Междинна сума</strong></strong></div>
-					<div class="col-md-6"><strong>{{number_format($total_price, 2, ".", "")}} {{$properties[0]->currency}}</strong></div>
-				</div>
-			</li>
-			<li class="list-group-item">
-				<div class="row">
 					<div class="col-md-6"><strong>Начин на плащане</strong></strong></div>
-					<div class="col-md-6"><strong>{{WebpaymentsController::getPaymentsById($order['order']->payment)[0]->name}}</strong></div>
+					<div class="col-md-6">{{WebpaymentsController::getPaymentsById($order['order']->payment)[0]->name}}</div>
 				</div>
 			</li>
 			<li class="list-group-item">
@@ -97,12 +100,12 @@
                             $price_delivery = 0.00;
                         }
                     ?>
-					<div class="col-md-6"><strong>{{WebdeliveriesController::getDeliveriesById($order['order']->delivery)[0]->name}}</strong>&nbsp;(Доставка +{{ number_format($price_delivery, 2, ".", "") }}&nbsp;{{$properties[0]->currency}})</div>
+					<div class="col-md-6">{{WebdeliveriesController::getDeliveriesById($order['order']->delivery)[0]->name}}&nbsp;(Доставка +{{ number_format($price_delivery, 2, ".", "") }}&nbsp;{{$properties[0]->currency}})</div>
 				</div>
 			</li>
 			<li class="list-group-item">
 				<div class="row">
-					<div class="col-md-6"><strong>Общо</strong></strong></div>
+					<div class="col-md-6"><strong>Обща {{ $dds_text }}</strong></div>
 					<div class="col-md-6"><strong>{{number_format($total_price + $price_delivery, 2, ".", "")}} {{$properties[0]->currency}}</strong></div>
 				</div>
 			</li>

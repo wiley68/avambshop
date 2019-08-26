@@ -391,6 +391,9 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                     @foreach ($subproducts as $subitem)
                     @php
                     $subproduct = Product::where(['code' => $subitem->subproducts_code])->first();
+                    if (empty($subproduct)){
+                        break;
+                    }
                     $shirina_q = 70;
                     $dalzina_q = 1000;
                     $visocina_q = 1000;
