@@ -4,11 +4,7 @@
 	<div class="card-body">
 		<div class="row">
 			<div class="col-sm">
-				@if(FirmsController::checkRemoteFile("{{ env('APP_SITE') }}/dist/img/logo_" . $firm->id . ".jpg"))
-					<img class="card-img-top" src="{{ env('APP_SITE') }}/dist/img/logo_{{ $firm->id }}.jpg" alt="Card image cap">
-				@else
-					<img class="card-img-top" src="{{ env('APP_SITE') }}/dist/img/products/product_.jpg" alt="Card image cap">					
-				@endif
+				<img class="card-img-top" src="{{ env('APP_SITE') }}/dist/img/logo_{{ $firm->id }}.jpg" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" alt="Card image cap">
 			</div>
 			<div class="col-9">
 				<ul class="list-group list-group-flush">
