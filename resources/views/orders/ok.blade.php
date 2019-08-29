@@ -61,7 +61,8 @@
 			<li class="list-group-item">
 				<div class="row">
 					<div class="col-md-6"><strong>Продукт</strong></div>
-					<div class="col-md-6"><strong>Общо</strong></div>
+                    <div class="col-md-3"><strong>Общо</strong></div>
+                    <div class="col-md-3"><strong>Снимка</strong></div>
 				</div>
 			</li>
 			@if (isset($order['suborder']) AND sizeof($order['suborder']) > 0)
@@ -73,7 +74,10 @@
                         {{ProductsController::getProductById($item['product_code'])->name}} <strong>x {{$item['quantity']}}</strong><br />
                         {!! html_entity_decode(ProductsController::getProductById($item['product_code'])->description) !!}
                     </div>
-					<div class="col-md-6">{{number_format($item['price'], 2, ".", "")}} {{$properties[0]->currency}}</div>
+                    <div class="col-md-3">{{number_format($item['price'], 2, ".", "")}} {{$properties[0]->currency}}</div>
+                    <div class="col-md-3">
+                        <img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($item['product_code'], -4) }}.jpg" class="img-thumbnail" alt="{{ $item['product_code'] }}" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" />
+                    </div>
 				</div>
 			</li>
 			<?php $total_price += floatval($item['price']); ?>
