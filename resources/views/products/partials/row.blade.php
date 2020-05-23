@@ -164,11 +164,17 @@
 		case 'h':
 		$typeprice1 = _('час');
 		break;
+		case 'km':
+		$typeprice1 = _('километър');
+		break;
 		case 'f':
 		$typeprice1 = _('конфигурация');
 		break;
 		case 't':
 		$typeprice1 = _('конфигурация');
+		break;
+		default:
+		$typeprice1 = _('брой');
 		break;
 	}
     ?>
@@ -231,11 +237,17 @@
 		case 'h':
 		$typeprice2 = _('час');
 		break;
+		case 'km':
+		$typeprice2 = _('километър');
+		break;
 		case 'f':
 		$typeprice2 = _('конфигурация');
 		break;
 		case 't':
 		$typeprice2 = _('конфигурация');
+		break;
+		default:
+		$typeprice2 = _('брой');
 		break;
 	}
     ?>

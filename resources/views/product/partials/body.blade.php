@@ -457,6 +457,11 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                     $dalzina_q = 0;
                     $visocina_q = 0;
                     break;
+                    case 'km':
+                    $shirina_q = 0;
+                    $dalzina_q = 0;
+                    $visocina_q = 0;
+		            break;
                     case 'f':
                     $quantity = "disabled";
                     break;
@@ -464,6 +469,10 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                     $shirina_q = 0;
                     $quantity = "disabled";
                     break;
+                    default:
+                    $shirina_q = 0;
+                    $dalzina_q = 0;
+                    $visocina_q = 0;
                     }
 
                     //send json data
