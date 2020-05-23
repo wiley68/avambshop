@@ -126,6 +126,15 @@ function buyOption (real_price, productName, product_typeprice, product_descript
 		$visocina = "disabled";
 		$visocina_q = 0;
 		break;
+		case 'km':
+		$typeprice = _('километър');
+		$shirina = "disabled";
+		$shirina_q = 0;
+		$dalzina = "disabled";
+		$dalzina_q = 0;
+		$visocina = "disabled";
+		$visocina_q = 0;
+		break;
 		case 'f':
 		$typeprice = 'конфигурация';
 		$quantity = "disabled";
@@ -135,6 +144,15 @@ function buyOption (real_price, productName, product_typeprice, product_descript
 		$shirina = "disabled";
 		$shirina_q = 0;
 		$quantity = "disabled";
+		break;
+		default:
+		$typeprice = _('брой');
+		$shirina = "disabled";
+		$shirina_q = 0;
+		$dalzina = "disabled";
+		$dalzina_q = 0;
+		$visocina = "disabled";
+		$visocina_q = 0;
 		break;
 	}
 	

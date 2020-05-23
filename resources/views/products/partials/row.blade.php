@@ -94,11 +94,17 @@
 		case 'h':
 		$typeprice0 = _('час');
 		break;
+		case 'km':
+		$typeprice0 = _('километър');
+		break;
 		case 'f':
 		$typeprice0 = _('конфигурация');
 		break;
 		case 't':
 		$typeprice0 = _('конфигурация');
+		break;
+		default:
+		$typeprice0 = _('брой');
 		break;
 	}
     ?>
