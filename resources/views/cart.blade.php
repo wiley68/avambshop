@@ -66,8 +66,9 @@
 		<table id="cart" class="table table-hover table-condensed">
 			<thead>
 				<tr>
-					<th style="width:60%">Продукт</th>
+					<th style="width:50%">Продукт</th>
 					<th style="width:10%">Цена</th>
+					<th style="width:10%">м.е.</th>
 					<th style="width:8%">Количество</th>
 					<th style="width:18%" class="text-center">Общо</th>
 					<th></th>
@@ -80,32 +81,32 @@
 				<?php
 					if(isset($item['product_name'])){
 						$item_product_name = $item['product_name'];
-						}else{
+					}else{
 						$item_product_name = "";
 					}
 					if(isset($item['product_description'])){
 						$item_product_description = $item['product_description'];
-						}else{
+					}else{
 						$item_product_description = "";
 					}
 					if(isset($item['product_quantity'])){
 						$item_product_quantity = $item['product_quantity'];
-						}else{
+					}else{
 						$item_product_quantity = 1;
 					}
 					if(isset($item['product_h'])){
 						$item_product_h = $item['product_h'];
-						}else{
+					}else{
 						$item_product_h = 0;
 					}
 					if(isset($item['product_l'])){
 						$item_product_l = $item['product_l'];
-						}else{
+					}else{
 						$item_product_l = 0;
 					}
 					if(isset($item['product_p'])){
 						$item_product_p = $item['product_p'];
-						}else{
+					}else{
 						$item_product_p = 0;
 					}
 					if(isset($item['product_real_kg'])){
@@ -117,20 +118,58 @@
 						$item_total_price = $item['total_price'];
 						$item_price = number_format(floatval($item_total_price) / floatval($item_product_quantity), 2, ".", "");
 						$total_price += floatval($item_total_price);
-						}else{
+					}else{
 						$item_total_price = "0";
 						$item_price = "0";
 						$total_price = "0";
 					}
 					if(isset($item['product_currency'])){
 						$item_product_currency = $item['product_currency'];
-						}else{
+					}else{
 						$item_product_currency = "лв";
 					}
 					if(isset($item['product_code'])){
 						$item_product_code = $item['product_code'];
-						}else{
+					}else{
 						$item_product_code = "";
+					}
+					switch ($item['product_typeprice']) {
+						case '0':
+							$typeprice = "";
+						break;
+						case 'm2':
+							$typeprice = _('квадратен метър');
+						break;
+						case 'lm':
+							$typeprice = _('линеен метър');
+						break;
+						case 'kg':
+							$typeprice = _('килограм');
+						break;
+						case 'l':
+							$typeprice = _('литър');
+						break;
+						case 'komplekt':
+							$typeprice = _('комплект');
+						break;
+						case 'br':
+							$typeprice = _('брой');
+						break;
+						case 'h':
+							$typeprice = _('час');
+						break;
+						case 'km':
+							$typeprice = _('километър');
+						break;
+						case 'f':
+							$typeprice = 'изделие';
+						break;
+						case 't':
+							$typeprice = 'изделие';
+						break;
+						default:
+							$typeprice = _('брой');
+						break;
 					}
 				?>
 				<tr>
@@ -158,6 +197,7 @@
 						</div>
 					</td>
 					<td data-th="Цена"><span id="item_price_<?php echo $count_cart; ?>_<?php echo $count_cart_firms; ?>">{{$item_price}}</span> {{$item_product_currency}}</td>
+					<td data-th="м.е.">{{$typeprice}}</td>
 					<td data-th="Количество">
 						<input type="number" min="1" id="item_quantity_<?php echo $count_cart; ?>_<?php echo $count_cart_firms; ?>" class="form-control text-center" value="{{$item_product_quantity}}" onchange="refreshCart('{{$count_cart}}', '{{$count_cart_firms}}', 'No');" >
 					</td>
