@@ -308,7 +308,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                     </div>
                     <div class="col-sm-2">
                         <dl class="param param-inline">
-                            <dt>Дъл.(L)</dt>
+                            <dt>Шир.(L)</dt>
                             <dd>
                                 <input id="l" class="form-control text-primary" {{ $dalzina }}
                                     style="width:84px;font-size:20px;font-weight:bold;" type="text"
@@ -319,7 +319,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                     </div>
                     <div class="col-sm-2">
                         <dl class="param param-inline">
-                            <dt>Шир.(P)</dt>
+                            <dt>Дълб.(P)</dt>
                             <dd>
                                 <input id="p" class="form-control text-primary" {{ $shirina }}
                                     style="width:84px;font-size:20px;font-weight:bold;" type="text"
