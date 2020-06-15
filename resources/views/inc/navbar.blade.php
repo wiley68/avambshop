@@ -22,7 +22,7 @@
 					</div>
 				</li>
 				<li class="nav-item dropdown {{ Request::is('products/by_firm') ? 'active' : '' }}">
-					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Производители <span class="caret"></span></a>
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Фирми <span class="caret"></span></a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						@if(count(FirmsController::getFirms()) > 0)
 							@foreach(FirmsController::getFirms() as $firm)
