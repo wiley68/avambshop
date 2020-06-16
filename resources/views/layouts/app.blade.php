@@ -38,13 +38,18 @@
 				@include('inc.messages')				
 				@yield('content')			
 			</div>					
-			@else
+			@elseif(Request::is('/'))
 			<div class="col-lg-9 col-md-9">				
 				@include('inc.messages')				
 				@yield('content')			
 			</div>			
 			<div class="col-lg-3 col-md-3">				
 				@include('inc.index-sidebar')			
+			</div>		
+			@else
+			<div class="col-lg-12 col-md-12">				
+				@include('inc.messages')				
+				@yield('content')			
 			</div>		
 			@endif		
 		</div>				
