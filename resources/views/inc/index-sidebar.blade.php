@@ -13,7 +13,7 @@
 	$ad8 = WebadsController::getAd8(); 
 	$ad9 = WebadsController::getAd9();
 	$ad10 = WebadsController::getAd10();
-
+	
 ?>
 @section('sidebar')
 <div class="card bg-light mb-3 shadow-lg rounded">
@@ -40,7 +40,7 @@
 <div class="card bg-light mb-3 shadow-lg rounded">
 	<div class="card-header">Партньори</div>
 	<?php 
-		if($ad1->inner_page == 1){
+		if($ad1->homepage == 1){
 	?>
 	<div class="card-body">
 		@if($ad1->name)
@@ -65,7 +65,7 @@
 	@endif
 	<?php 
 		} 
-		if($ad2->inner_page == 1){
+		if($ad2->homepage == 1){
 	?>
 	<div class="card-body">
 		@if($ad2->name)
@@ -89,7 +89,7 @@
 	@endif
 	<?php 
 		} 
-		if($ad3->inner_page == 1){
+		if($ad3->homepage == 1){
 	?>
 	<div class="card-body">
 		@if($ad3->name)
@@ -113,7 +113,7 @@
 	@endif
 	<?php 
 		}
-		if($ad4->inner_page == 1){
+		if($ad4->homepage == 1){
 	?>
 	<div class="card-body">
 		@if($ad4->name)
@@ -137,7 +137,7 @@
 	@endif
 	<?php 
 		}
-		if($ad5->inner_page == 1){
+		if($ad5->homepage == 1){
 	?>
 		<div class="card-body">
 		@if($ad5->name)
@@ -161,7 +161,7 @@
 	@endif
 	<?php 
 		}
-		if($ad6->inner_page == 1){
+		if($ad6->homepage == 1){
 	?>
 		<div class="card-body">
 		@if($ad6->name)
@@ -185,7 +185,7 @@
 	@endif
 	<?php 
 		}
-		if($ad7->inner_page == 1){
+		if($ad7->homepage == 1){
 	?>
 		<div class="card-body">
 		@if($ad7->name)
@@ -209,7 +209,7 @@
 	@endif
 	<?php 
 		}
-		if($ad8->inner_page == 1){
+		if($ad8->homepage == 1){
 	?>
 		<div class="card-body">
 		@if($ad8->name)
@@ -233,7 +233,7 @@
 	@endif
 	<?php 
 		}
-		if($ad9->inner_page == 1){
+		if($ad9->homepage == 1){
 	?>
 		<div class="card-body">
 		@if($ad9->name)
@@ -257,7 +257,7 @@
 	@endif
 	<?php 
 		}
-		if($ad10->inner_page == 1){
+		if($ad10->homepage == 1){
 	?>
 		<div class="card-body">
 		@if($ad10->name)

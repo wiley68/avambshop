@@ -44,7 +44,7 @@
 				@yield('content')			
 			</div>			
 			<div class="col-lg-3 col-md-3">				
-				@include('inc.sidebar')			
+				@include('inc.index-sidebar')			
 			</div>		
 			@endif		
 		</div>				
