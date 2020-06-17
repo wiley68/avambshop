@@ -52,7 +52,8 @@ function buyOption (real_price, productName, product_typeprice, product_descript
 	$dalzina_q = 0;
 	$visocina = "";
 	$visocina_q = 0;
-	$quantity = "";
+    $quantity = "";
+    $txt_velicini = "";
 	switch ($product->typeprice) {
 		case '0':
 		$typeprice = "";
@@ -137,13 +138,20 @@ function buyOption (real_price, productName, product_typeprice, product_descript
 		break;
 		case 'f':
 		$typeprice = 'конфигурация';
-		$quantity = "disabled";
+        $quantity = "disabled";
+        $pos_p = strpos(strtolower($product->formula), 'p');
+        if ($pos_p === false){
+            $shirina = "disabled";
+		    $shirina_q = 0;
+        }
+        $txt_velicini = "Попълнете величините в белите карета.";
 		break;
 		case 't':
 		$typeprice = 'конфигурация';
 		$shirina = "disabled";
 		$shirina_q = 0;
-		$quantity = "disabled";
+        $quantity = "disabled";
+        $txt_velicini = "Попълнете величините в белите карета.";
 		break;
 		default:
 		$typeprice = _('брой');
@@ -329,6 +337,13 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                         </dl>
                     </div>
                 </div>
+                @if ($txt_velicini != "")
+                <div class="row">
+                    <div class="col-sm-12" style="font-size:18px;color:red;">
+                        {{ $txt_velicini }}
+                    </div>
+                </div>                    
+                @endif
                 <hr>
                 <button id="btn_buy" class="btn btn-lg btn-primary text-uppercase"> КУПИ </button>
             </article>
