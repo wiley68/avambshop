@@ -1,6 +1,6 @@
 <?php use App\Http\Controllers\FirmsController;?>
 <?php use App\Http\Controllers\CategoriesProductsController;?>
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #00A2E7;">
 	<div class="container">
 		<a class="navbar-brand" href="/">AVAMB Shop</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
 			<form class="form-inline my-2 my-lg-0" enctype="multipart/form-data" action="{{ route('products.search') }}" method="post" name="search_products" id="search_products" novalidate>	
 				{{ csrf_field() }}	
 				<input class="form-control mr-sm-2" name="termin" type="search" placeholder="Въведете търсения израз" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Търси</button>
+				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Търси</button>
 			</form>
 			<ul class="navbar-nav ml-auto">
 				<!-- Authentication Links -->
