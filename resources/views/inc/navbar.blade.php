@@ -34,8 +34,8 @@
 			</ul>
 			<form class="form-inline my-2 my-lg-0" enctype="multipart/form-data" action="{{ route('products.search') }}" method="post" name="search_products" id="search_products" novalidate>	
 				{{ csrf_field() }}	
-				<input class="form-control mr-sm-2" name="termin" type="search" placeholder="Въведете търсения израз" aria-label="Search">
-				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Търси</button>
+				<input class="form-control mr-sm-2" name="termin" type="search" placeholder="Въведете..." aria-label="Search">
+				<button class="btn btn-outline-light my-2 my-sm-0" type="submit" title="Въведете търсения продукт или услуга">Търси</button>
 			</form>
 			<ul class="navbar-nav ml-auto">
 				<!-- Authentication Links -->
