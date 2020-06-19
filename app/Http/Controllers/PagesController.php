@@ -9,6 +9,19 @@ use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
+	function previous_route()
+	{
+		$previousRequest = app('request')->create(app('url')->previous());
+
+		try {
+			$routeName = app('router')->getRoutes()->match($previousRequest)->getName();
+		} catch (NotFoundHttpException $exception) {
+			return null;
+		}
+
+		return $routeName;
+	}
+
     public function getHome(){
 		return view('home');
 	}
