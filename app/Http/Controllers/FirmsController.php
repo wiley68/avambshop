@@ -4,12 +4,22 @@
 	
 	use Illuminate\Http\Request;
 	use App\Firm;
+	use Illuminate\Support\Facades\DB;
 	
 	class FirmsController extends Controller
 	{
 		public static function getFirms(){
 			$firms = Firm::where('isshop', '>', 0)->get();
 			return $firms;
+		}
+
+		public static function getFirms10(){
+			$product_info = DB::table('products')
+                 ->select('firm_id', DB::raw('count(*) as total'))
+                 ->groupBy('firm_id')
+				 ->take(10)
+				 ->get();
+			return $product_info;
 		}
 		
 		public static function getPaginatedFirms(){

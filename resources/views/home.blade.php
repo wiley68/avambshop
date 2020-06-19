@@ -32,9 +32,12 @@
 	<div class="card-header"><a href="firms" title="Покажи всички фирми в каталога.">Търговци</a></div>
 	<div class="card-body">
 		<h5 class="card-title">Препоръчани търговци</h5>
-		@if(count(FirmsController::getFirms()) > 0)
-			@foreach(FirmsController::getFirms() as $firm)
-				<a href="{{ route('products.by_firm', ['id' => $firm->id]) }}" title="Покажи всички стоки на този търговец">{{ $firm->firm }}</a><br />
+		@if(count(FirmsController::getFirms10()) > 0)
+			@foreach(FirmsController::getFirms10() as $product)
+				@php
+					$firm = FirmsController::getFirmById($product->firm_id);
+				@endphp
+				<a href="{{ route('products.by_firm', ['id' => $firm[0]->id]) }}" title="Покажи всички стоки на този търговец">{{ $firm[0]->firm }}</a><br />
 			@endforeach
 		@endif
 	</div>
