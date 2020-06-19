@@ -97,7 +97,9 @@ class WebordersController extends Controller
 			}
 			$objMail->sender = env('MAIL_USERNAME','AVAMB Logiciel');
             $objMail->receiver = $order->name;
-            $objMail->isadmin = 'No';
+			$objMail->isadmin = 'No';
+			$objMail->phone = $order->phone;
+			$objMail->email = $order->email;
  
 			Mail::to($order->email)->send(new OrderEmail($objMail));
 
@@ -116,7 +118,9 @@ class WebordersController extends Controller
 			}
 			$objMailAdmin->sender = env('MAIL_USERNAME','AVAMB Logiciel');
             $objMailAdmin->receiver = 'Администратор AVAMB Logiciel';
-            $objMailAdmin->isadmin = 'Yes';
+			$objMailAdmin->isadmin = 'Yes';
+			$objMailAdmin->phone = $order->phone;
+			$objMailAdmin->email = $order->email;
 
             //to mail
             $firm_mail = Firm::where(['id' => $order->firm_id])->first()->firm_mail;

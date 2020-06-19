@@ -59,4 +59,4 @@
 </div>
 
 Благодарим Ви, за доверието<br />
-Служител от фирма {{ FirmsController::getFirmById($order->firm_id)[0]->firm }} ще се свърже с Вас за уточнение на поръчката.
+Служител от фирма {{ FirmsController::getFirmById($order->firm_id)[0]->firm }} ще се свърже с Вас за уточнение на поръчката. На телефон: {{ $order->phone }} или на email: {{ $order->email }}
