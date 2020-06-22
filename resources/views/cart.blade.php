@@ -110,7 +110,7 @@
 						$item_product_p = 0;
 					}
 					if(isset($item['product_real_kg'])){
-						$item_product_real_kg = $item['product_real_kg'];
+						$item_product_real_kg = number_format(floatval($item['product_real_kg']), 2, ".", "");
 					}else{
 						$item_product_real_kg = 0;
 					}
