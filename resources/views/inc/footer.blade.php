@@ -9,7 +9,7 @@
 				<p>{!! html_entity_decode($footer->text) !!}</p>
 			</div>
 			<div class="col-sm">
-				<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+				<div class="card text-white mb-3" style="max-width: 18rem;background-color:#00b3ff;">
 					<h4 class="card-header"><a href="/firms" title="Покажи всички фирми в каталога.">Търговци</a></h4>
 					<div class="card-body">
 						@if(count(FirmsController::getFirmRandom(4)) > 0)
@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="col-sm">
-				<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+				<div class="card text-white mb-3" style="max-width: 18rem;background-color:#00b3ff;">
 					<h4 class="card-header">Информация</h4>
 					<div class="card-body">
 						<a href="/terms">Общи условия</a><br />
@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div class="col-sm">
-				<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+				<div class="card text-white mb-3" style="max-width: 18rem;background-color:#00b3ff;">
 					<h4 class="card-header">Как да ни намерите</h4>
 					<div class="card-body">
 						<span class="card-text">{{ $footer->phone }}</span><br />
