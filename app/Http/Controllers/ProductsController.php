@@ -30,23 +30,13 @@ class ProductsController extends Controller
 		return $products;
 	}
 
-	public static function getProductsByTermin($termin, $referer = null){
+	public static function getProductsByTermin($termin){
 		$firms_id = FirmsController::getFirmsByIsshop();
-		if($referer == null){
 		$products = Product::whereIn('firm_id', $firms_id)
 			->where('name', 'like', '%'.$termin.'%')
 			->orWhere('code', 'like', '%'.$termin.'%')
 			->where('isshop', '>', 0)
 			->paginate(9);
-		}
-		else{
-			$products = Product::whereIn('firm_id', $firms_id)
-			->where('name', 'like', '%'.$termin.'%')
-			->orWhere('code', 'like', '%'.$termin.'%')
-			->where('isshop', '>', 0)
-			->where('firm_id', '=', $referer)
-			->paginate(9);
-		}
 		return $products;
 	}
 

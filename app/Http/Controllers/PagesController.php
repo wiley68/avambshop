@@ -90,20 +90,10 @@ class PagesController extends Controller
 	}
 
 	public function getProductsSearch(Request $request){
-		
 		$response = array(
 			'termin' => $request->termin
 		);
-		
-		$refererName = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
-		if($refererName == "products.by_firm"){
-			$referer = substr($request->headers->get('referer'), -1);
-			$allproducts = ProductsController::getProductsByTermin($response['termin'], $referer);
-		}
-		else{
-			$allproducts = ProductsController::getProductsByTermin($response['termin'], null);
-		}
-
+		$allproducts = ProductsController::getProductsByTermin($response['termin']);
 		return view('products/products')->with([
 			'allproducts' => $allproducts,
 			'termin' => $response['termin']
