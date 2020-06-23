@@ -89,11 +89,24 @@ class PagesController extends Controller
 		]);
 	}
 
-	public function getProductsSearch(Request $request){
+	public function getProductsSearch(Request $request) {
+		$referrer = $request->headers->get('referer');
+		$link_array = explode('/',$referrer);
+		if (end($link_array) == "search"){
+			$route_name = "";
+		}else{
+			$route_name = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
+		}
 		$response = array(
 			'termin' => $request->termin
 		);
-		$allproducts = ProductsController::getProductsByTermin($response['termin']);
+		if ($route_name == "products.by_firm"){
+			$previous = app('request')->create(url()->previous());
+			$param = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->parameters["id"];
+			$allproducts = ProductsController::getProductsByTerminId($response['termin'], $param);
+		}else{
+			$allproducts = ProductsController::getProductsByTermin($response['termin']);
+		}
 		return view('products/products')->with([
 			'allproducts' => $allproducts,
 			'termin' => $response['termin']

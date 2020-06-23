@@ -40,6 +40,14 @@ class ProductsController extends Controller
 		return $products;
 	}
 
+	public static function getProductsByTerminId($termin, $id){
+		$products = Product::where('name', 'LIKE', '%'.$termin.'%')->orWhere('code', 'LIKE', '%'.$termin.'%')->andWhere(['firm_id' => $id]);
+		$products = $products->where(['firm_id' => $id]);
+		dd($products->get(), $id);
+		$products = $products->where('isshop', '>', 0)->paginate(9);
+		return $products;
+	}
+
 	public static function getProductsRandom($nomber){
         $firms_id = FirmsController::getFirmsByIsshop();
 		$product_count = Product::whereIn('firm_id', $firms_id)->where('isshop', '>', 0)->count();
