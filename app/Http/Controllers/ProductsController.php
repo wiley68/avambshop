@@ -41,10 +41,11 @@ class ProductsController extends Controller
 	}
 
 	public static function getProductsByTerminId($termin, $id){
-		$products = Product::where('name', 'LIKE', '%'.$termin.'%')->orWhere('code', 'LIKE', '%'.$termin.'%')->andWhere(['firm_id' => $id]);
-		$products = $products->where(['firm_id' => $id]);
-		dd($products->get(), $id);
-		$products = $products->where('isshop', '>', 0)->paginate(9);
+		$products = Product::where([['name', 'like', '%'.$termin.'%'],['firm_id','=', $id]])
+			->orWhere([['code','like', '%'.$termin.'%'],['firm_id','=', $id]])
+			->where('isshop', '>', 0)
+			->paginate(9);
+
 		return $products;
 	}
 
