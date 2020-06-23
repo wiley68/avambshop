@@ -199,7 +199,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                 </a>
                 <div class="modal fade" id="modalPicture" tabindex="-1" role="dialog" aria-labelledby="productName"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="productName">{{ $product->name }}</h5>
