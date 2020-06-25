@@ -145,17 +145,7 @@ $("#btn_buy").click(function () {
         },
         dataType: 'JSON',
         success: function success(data) {
-            if ($("#cart_mini").is(":visible")) {
-                var curr_count = parseInt($("#count_cart_items").html());
-                curr_count++;
-                $("#count_cart_items").html(curr_count.toString());
-            } else {
-                $("#count_cart_items").html("1");
-            }
-            window.scrollTo(0, 0);
-            $("#message_div").show("slow", function () {
-                $("#message_div").html("Успешно добавихте продукта. Можете да продължите с разглеждането на <a href='/' title='Онлайн магазин AVAMB.'>магазина</a> ни, или да закупите продуктите във вашата <a href='/cart' title='Вижте съдържанието на Вашата Количка.'>Количка</a>.");
-            });
+            window.location.reload();
         }
     });
 });
