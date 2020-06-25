@@ -183,6 +183,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
     }
 	$real_kg = floatval(json_decode($response_body)->new_kg);
 ?>
+<br />
 <div id="message_div" class="alert alert-success" role="alert"></div>
 <input type="hidden" id="app_site" value="{{ env('APP_SITE') }}" />
 <input type="hidden" id="dds" value="{{ $settings[0]->dds }}">
