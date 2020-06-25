@@ -130,20 +130,8 @@
 <script>
 function printOrder(e, order)
 {
-    e.preventDefault();
-    var mywindow = window.open('', 'PRINT');
-
-    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-    mywindow.document.write('</head><body >');
-    mywindow.document.write('<h1>' + document.title  + '</h1>');
-    mywindow.document.write(document.getElementById("print_div_"+order).innerHTML);
-    mywindow.document.write('</body></html>');
-
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
-
-    mywindow.print();
-    mywindow.close();
+	e.preventDefault();
+	window.print();
 
     return true;
 }
