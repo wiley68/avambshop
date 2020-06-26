@@ -71,7 +71,20 @@
 			<li class="list-group-item">
 				<div class="row">
 					<div class="col-md-8">
-                        {{ProductsController::getProductById($item['product_code'])->name}} <strong>x {{$item['quantity']}}</strong><br />
+						<p class="head">{{ProductsController::getProductById($item['product_code'])->name}} x {{$item['quantity']}}</p>
+						@if ((!empty($item->h) && $item->h != "0") || (!empty($item->l) && $item->l != "0") || (!empty($item->p) && $item->p != "0"))
+							<p class="subhead">
+								@if (!empty($item->h) && $item->h != "0")
+									Височина: {{ $item->h }} mm&nbsp;&nbsp;
+								@endif 
+								@if (!empty($item->l) && $item->l != "0")
+									Ширина: {{ $item->l }} mm&nbsp;&nbsp;
+								@endif 
+								@if (!empty($item->p) && $item->p != "0")
+									Дълбочина: {{ $item->p }} mm
+								@endif 
+							</p>
+						@endif
                         {!! html_entity_decode(ProductsController::getProductById($item['product_code'])->description) !!}
                     </div>
                     <div class="col-md-1">{{number_format($item['price'], 2, ".", "")}} {{$properties[0]->currency}}</div>

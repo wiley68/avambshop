@@ -103,6 +103,16 @@ p {
   margin-bottom: 1rem;
 }
 
+p.head {
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+p.subhead {
+  font-size: 16px;
+}
+
 abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;
@@ -11748,7 +11758,7 @@ a.text-dark:focus {
   margin-top: 30px;
   padding: 20px;
   color: white;
-  background: #00A2E7;
+  background: #00a2e7;
 }
 
 #footer a,
