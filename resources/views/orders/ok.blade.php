@@ -60,8 +60,8 @@
 		<ul class="list-group list-group-flush">
 			<li class="list-group-item">
 				<div class="row">
-					<div class="col-md-6"><strong>Продукт</strong></div>
-                    <div class="col-md-3"><strong>Общо</strong></div>
+					<div class="col-md-8"><strong>Продукт</strong></div>
+                    <div class="col-md-1"><strong>Общо</strong></div>
                     <div class="col-md-3"><strong>Снимка</strong></div>
 				</div>
 			</li>
@@ -70,11 +70,24 @@
 			@foreach($order['suborder'] as $item)
 			<li class="list-group-item">
 				<div class="row">
-					<div class="col-md-6">
-                        {{ProductsController::getProductById($item['product_code'])->name}} <strong>x {{$item['quantity']}}</strong><br />
+					<div class="col-md-8">
+						<p class="head">{{ProductsController::getProductById($item['product_code'])->name}} x {{$item['quantity']}}</p>
+						@if ((!empty($item->h) && $item->h != "0") || (!empty($item->l) && $item->l != "0") || (!empty($item->p) && $item->p != "0"))
+							<p class="subhead">
+								@if (!empty($item->h) && $item->h != "0")
+									Височина: {{ $item->h }} mm&nbsp;&nbsp;
+								@endif 
+								@if (!empty($item->l) && $item->l != "0")
+									Ширина: {{ $item->l }} mm&nbsp;&nbsp;
+								@endif 
+								@if (!empty($item->p) && $item->p != "0")
+									Дълбочина: {{ $item->p }} mm
+								@endif 
+							</p>
+						@endif
                         {!! html_entity_decode(ProductsController::getProductById($item['product_code'])->description) !!}
                     </div>
-                    <div class="col-md-3">{{number_format($item['price'], 2, ".", "")}} {{$properties[0]->currency}}</div>
+                    <div class="col-md-1">{{number_format($item['price'], 2, ".", "")}} {{$properties[0]->currency}}</div>
                     <div class="col-md-3">
                         <img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($item['product_code'], -4) }}.jpg" class="img-thumbnail" alt="{{ $item['product_code'] }}" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" />
                     </div>
