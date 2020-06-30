@@ -9,6 +9,9 @@ use App\Mail\OrderEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Firm;
+use PDF;
+use App\Webpayment;
+use App\Webdeliverie;
 
 class WebordersController extends Controller
 {
@@ -138,6 +141,26 @@ class WebordersController extends Controller
         }
 		
 		return view('orders/ok', ['orders' => $orders]);
+	}
+	
+	public function print(Request $request, $id = null){
+		if ($id != null){
+			$order = Weborder::where(['id' => $id])->firstOrFail();
+			$suborders = Subweborder::where(['order_id' => $id])->get();
+			$payment = Webpayment::where(['id' => $order->payment])->firstOrFail();
+			$delivery = Webdeliverie::where(['id' => $order->delivery])->firstOrFail();
+			//dd($order);
+			$firm = Firm::where(['id' => $order->firm_id])->firstOrFail();
+			$data = [
+				'order' => $order,
+				'firm' => $firm,
+				'suborders' => $suborders,
+				'payment' => $payment,
+				'delivery' => $delivery
+			];
+			$pdf = PDF::loadView('orders.print', $data);
+			return $pdf->stream('document.pdf');
+		}
     }
     
     public function deleteOrder(Request $request, $id=null){

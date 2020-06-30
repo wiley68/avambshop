@@ -7,6 +7,7 @@
 <?php use App\Http\Controllers\SubdeliveriesController;?>
 <?php $properties = PropertiesController::getAllProperties();?>
 <?php use App\Http\Controllers\WebsettingsController;?>
+
 <?php $settings = WebsettingsController::getAllSettings(); ?>
 @php
     if ($settings[0]->dds == 'Yes'){
@@ -56,7 +57,7 @@
 <div class="row">
 	<div class="col-md-12">
 	<div class="card bg-default mb-3">
-        <div class="card-header">Вашата поръчка от фирма: {{FirmsController::getFirmById($order['order']->firm_id)[0]->firm}}&nbsp;(<a href="#" onclick="printOrder(event, '{{ $order['order']->id }}');">Принтирай поръчката</a>)</div>
+        <div class="card-header">Вашата поръчка от фирма: {{FirmsController::getFirmById($order['order']->firm_id)[0]->firm}}&nbsp;(<a target="_blank" href="{{ route('order.print', ['id' => $order['order']->id]) }}">Принтирай поръчката</a>)</div>
 		<ul class="list-group list-group-flush">
 			<li class="list-group-item">
 				<div class="row">
@@ -138,15 +139,3 @@
 <h3>Ще се свържем с Вас за потвърждение на поръчката.</h3>
 @endif
 @endsection
-
-@section('scripts')
-<script>
-function printOrder(e, order)
-{
-	e.preventDefault();
-	window.print();
-
-    return true;
-}
-</script>
-@stop

@@ -36,6 +36,7 @@ Route::post('/profile/save', 'UsersController@saveUser');
 Route::get('/cart', 'PagesController@getCart');
 Route::get('/order', 'PagesController@getOrder');
 Route::post('/order/submit', 'WebordersController@submit');
+Route::get('/order/print/{ids}', 'WebordersController@print')->name('order.print');
 Route::get('/mailorder', 'PagesController@getEmailsOrder');
 Route::get('sendhtmlemail','MailController@html_email');
 
