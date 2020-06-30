@@ -41,6 +41,9 @@
             @php
                 $product = Product::where(['code' => $suborder->product_code])->firstOrFail();
                 $product_me = $product->typeprice;
+                $visocina = "";
+                $shirina = "";
+                $dalbocina = "";
                 switch ($product_me) {
 		            case '0':
 		                $product_me_txt = "";
