@@ -132,33 +132,7 @@
 </div>
 <hr />
 <a href="/orders" class="btn btn-info">Обратно в моите поръчки</a>
-<button id="print_order" class="btn btn-info">Принтирай</button>
+<a target="_blank" href="{{ route('order.print', ['id' => $order->id]) }}" class="btn btn-info">Принтирай</a>
 @endguest
 
 @endsection
-
-@section('scripts')
-<script>
-function PrintElem(elem)
-{
-    var mywindow = window.open('', 'PRINT');
-
-    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-    mywindow.document.write('</head><body >');
-    mywindow.document.write('<h1>' + document.title  + '</h1>');
-    mywindow.document.write(document.getElementById(elem).innerHTML);
-    mywindow.document.write('</body></html>');
-
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
-
-    mywindow.print();
-    mywindow.close();
-
-    return true;
-}
-$("#print_order").click(function(e){
-    PrintElem('print_div');
-});
-</script>
-@stop
