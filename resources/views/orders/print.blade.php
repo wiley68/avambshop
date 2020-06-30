@@ -73,7 +73,7 @@
 		                $product_me_txt = 'километър';
             		break;
 		            case 'f':
-		                $product_me_txt = 'конфигурация';
+		                $product_me_txt = 'изделие';
                         $pos_h = strpos(strtolower($product->formula), 'h');
                         if ($pos_h !== false){
                             $visocina = "Височина: " . $suborder->h . " mm ";
@@ -94,7 +94,7 @@
                         }
             		break;
             		case 't':
-		                $product_me_txt = 'конфигурация';
+		                $product_me_txt = 'изделие';
             		break;
 		            default:
 		                $product_me_txt = 'брой';
@@ -104,7 +104,7 @@
             <tr>
                 <td style="padding: 10px;width: 60%;vertical-align: top;text-align: left;border-left:1px solid silver;border-top:1px solid silver;border-bottom:1px solid silver;">
                     <span style="font-weight: bold;text-decoration: underline;">{{ $product->name }}</span><br /><br />
-                    {{ $product_me_txt }}&nbsp;{{ $suborder->quantity }}<br /><br />
+                    {{ $suborder->quantity }}&nbsp;-&nbsp;{{ $product_me_txt }}<br /><br />
                     {{ $visocina }}{{  $shirina }}{{ $dalbocina }}<br /><br />
                     {{ $product->description }}
                 </td>
