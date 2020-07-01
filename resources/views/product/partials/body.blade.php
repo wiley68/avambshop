@@ -16,7 +16,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
             _token: $('meta[name="csrf-token"]').attr('content'),
             total_price: real_price,
             product_name: productName,
-            product_quantity: '1',
+            product_quantity: $("#product_quantity").val(),
             product_typeprice: product_typeprice,
             product_description: product_description,
             product_currency: product_currency,
@@ -294,7 +294,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                                     <div class="col-4 text-left">
                                         <input id="product_quantity" class="form-control text-primary" {{ $quantity }}
                                             style="width:84px;font-size:28px;font-weight:bold;" type="text"
-                                            onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="1" />
+                                            onkeyup="this.value=this.value.replace(/[^0-9.]/g,'');" value="1" />
                                     </div>
                                     <div class="col text-left d-flex align-items-end">
                                         {{ $typeprice }}

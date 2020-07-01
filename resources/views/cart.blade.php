@@ -55,7 +55,6 @@
 	@if (isset($cart_session) AND sizeof($cart_session['firms']) > 0)
 	<?php $grand_total_price = 0; ?>
 	<?php $count_cart_firms = 0; ?>
-	
 	@foreach($cart_session['firms'] as $firm)
 	
 	<div class="card">
