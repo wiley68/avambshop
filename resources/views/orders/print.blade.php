@@ -95,20 +95,20 @@
             		break;
             		case 't':
                         $product_me_txt = 'изделие';
-                        if (($suborder->h != '') || ($suborder->h != 0)){
-                            $visocina = "Височина: " . $suborder->h . " mm ";
-                        }else{
+                        if (($suborder->h == '') || ($suborder->h == 0)){
                             $visocina = "";
-                        }
-                        if (($suborder->l != '') || ($suborder->l != 0)){
-                            $shirina = "Ширина: " . $suborder->l . " mm ";
                         }else{
+                            $visocina = "Височина: " . $suborder->h . " mm ";
+                        }
+                        if (($suborder->l == '') || ($suborder->l == 0)){
                             $shirina = "";
-                        }
-                        if (($suborder->p != '') || ($suborder->p != 0)){
-                            $dalbocina = "Дълбочина: " . $suborder->p . " mm";
                         }else{
+                            $shirina = "Ширина: " . $suborder->l . " mm ";
+                        }
+                        if (($suborder->p == '') || ($suborder->p == 0)){
                             $dalbocina = "";
+                        }else{
+                            $dalbocina = "Дълбочина: " . $suborder->p . " mm";
                         }
             		break;
 		            default:
@@ -120,7 +120,7 @@
                 <td style="padding: 10px;width: 60%;vertical-align: top;text-align: left;border-left:1px solid silver;border-top:1px solid silver;border-bottom:1px solid silver;">
                     <span style="font-weight: bold;text-decoration: underline;">{{ $product->name }}</span><br /><br />
                     {{ $suborder->quantity }}&nbsp;-&nbsp;{{ $product_me_txt }}<br /><br />
-                    {{ $visocina }}{{  $shirina }}{{ $dalbocina }}<br /><br />
+                    {{ $visocina }}{{  $shirina }}{{ $dalbocina }}<br /><br />{{$suborder->p}}
                     {{ $product->description }}
                 </td>
                 <td style="padding: 10px;width: 10%;vertical-align: top;text-align: left;border-left:1px solid silver;border-top:1px solid silver;border-bottom:1px solid silver;">
