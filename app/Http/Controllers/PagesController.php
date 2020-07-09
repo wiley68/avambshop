@@ -44,11 +44,11 @@ class PagesController extends Controller
     
     public function getOrders(){
         $user = Auth::user();
-        $orders = Weborder::where(['user_id' => $user->id])->orderBy('id', 'DESC')->get();
+		$orders = Weborder::where(['user_id' => $user->id])->orderBy('id', 'DESC')->get();
         $properties = PropertiesController::getAllProperties()->first();
 		return view('orders')->with([
             'orders' => $orders,
-            'properties' => $properties
+			'properties' => $properties
 		]);
     }
     

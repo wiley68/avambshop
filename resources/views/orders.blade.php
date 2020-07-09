@@ -1,3 +1,4 @@
+<?php use App\Firm; ?>
 @extends('layouts/app')
 
 @section('content')
@@ -13,6 +14,8 @@
             <th class="th-sm">№
             </th>
             <th class="th-sm">Дата
+            </th>
+            <th class="th-sm">Към фирма
             </th>
             <th class="th-sm">Обща цена ({{ $properties->currency }})
             </th>
@@ -30,6 +33,7 @@
                 $newDate = date("d.m.Y", strtotime($order->dateon));
             @endphp
             <td>{{ $newDate }}</td>
+            <td>{{ Firm::where(['id' => $order->firm_id])->first()->firm }}</td>
             <td>{{ $order->allprice }}</td>
             @php
                 switch ($order->status) {
@@ -60,6 +64,8 @@
             <th>№
             </th>
             <th>Дата
+            </th>
+            <th>Към фирма
             </th>
             <th>Обща цена ({{ $properties->currency }})
             </th>
