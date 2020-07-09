@@ -95,17 +95,17 @@
             		break;
             		case 't':
                         $product_me_txt = 'изделие';
-                        if (($suborder->h !== '') && ($suborder->h !== 0)){
+                        if (($suborder->h != '') && ($suborder->h != 0)){
                             $visocina = "Височина: " . $suborder->h . " mm ";
                         }else{
                             $visocina = "";
                         }
-                        if (($suborder->l !== '') && ($suborder->l !== 0)){
+                        if (($suborder->l != '') && ($suborder->l != 0)){
                             $shirina = "Ширина: " . $suborder->l . " mm ";
                         }else{
                             $shirina = "";
                         }
-                        if (($suborder->p !== '') && ($suborder->p !== 0)){
+                        if (($suborder->p != '') && ($suborder->p != 0)){
                             $dalbocina = "Дълбочина: " . $suborder->p . " mm";
                         }else{
                             $dalbocina = "";
