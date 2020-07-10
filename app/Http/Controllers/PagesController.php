@@ -89,6 +89,13 @@ class PagesController extends Controller
 		]);
 	}
 
+	public function requestProduct(Request $request, $id=null){
+		$product = ProductsController::getProductById($id);
+		return view('request')->with([
+			'product_code' => $product->code
+		]);
+	}
+
 	public function getProductsSearch(Request $request) {
 		$referrer = $request->headers->get('referer');
 		$link_array = explode('/',$referrer);

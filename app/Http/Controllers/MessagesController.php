@@ -26,4 +26,24 @@ class MessagesController extends Controller
 		
 		return redirect('/contact?status=Yes');
 	}
+
+	public function submitRequest(Request $request){
+		$this->validate($request, [
+			'name' => 'required',
+			'email' => 'required'
+		]);
+		
+		//create new message
+		$message = new Message;
+		$message->name = $request->input('name');
+		$message->email = $request->input('email');
+		$message->message = $request->input('message') . "Относно: " . $request->input('product_code');
+		$date_timestamp = time();
+		$message->created_at = $date_timestamp;
+		$message->updated_at = $date_timestamp;
+		//save message
+		$message->save();
+		
+		return redirect('/?status=Yes');
+	}
 }

@@ -18,6 +18,11 @@
 @extends('layouts/app')
 
 @section('content')
+@if(null !== (app('request')->input('status')))
+	<div class="alert alert-success" role="alert">
+		Вие успешно изпратихте вашето съобщение!
+	</div>
+@endif
 <h1>{{ $home->name }}</h1>
 <p>{!! html_entity_decode ($home->text) !!}</p>
 <hr />

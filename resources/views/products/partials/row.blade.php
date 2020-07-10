@@ -129,7 +129,7 @@
 		</ul>
 		<div class="card-footer">
 			@if($real_price_0 == '0.00')
-				<a href="#" class="btn btn-outline-info float-left shadow-sm">Запитай</a>				
+				<a href="{{ route('request-product', ['id' => $product[0]->code]) }}" class="btn btn-outline-info float-left shadow-sm">Запитай</a>				
 			@else
 				<button name="btn_buy" id="{{ $product[0]->code }}" class="btn btn-primary float-left shadow-sm">Купи</button>
 				<h5 class="font-weight-bold float-right"><span id="real_price_{{ $product[0]->code }}">{{ number_format($real_price_0, 2, ".", "") }}</span> <span style="font-size: 10px;" class="text-muted">{{ $properties[0]->currency }}&nbsp;{{ $dds_text_0 }}</span></h5>
@@ -199,7 +199,7 @@
 		</ul>
 		<div class="card-footer">
 			@if($real_price_1 == '0.00')
-				<a href="#" class="btn btn-outline-info float-left shadow-sm">Запитай</a>				
+				<a href="{{ route('request-product', ['id' => $product[1]->code]) }}" class="btn btn-outline-info float-left shadow-sm">Запитай</a>				
 			@else
 				<button name="btn_buy" id="{{ $product[1]->code }}" class="btn btn-primary float-left shadow-sm">Купи</button>
 				<h5 class="font-weight-bold float-right"><span id="real_price_{{ $product[1]->code }}">{{ number_format($real_price_1, 2, ".", "") }}</span> <span style="font-size: 10px;" class="text-muted">{{ $properties[0]->currency }}&nbsp;{{ $dds_text_1 }}</span></h5>
@@ -272,7 +272,7 @@
 		</ul>
 		<div class="card-footer">
 			@if($real_price_2 == '0.00')
-				<a href="#" class="btn btn-outline-info float-left shadow-sm">Запитай</a>				
+				<a href="{{ route('request-product', ['id' => $product[2]->code]) }}" class="btn btn-outline-info float-left shadow-sm">Запитай</a>				
 			@else
 				<button name="btn_buy" id="{{ $product[2]->code }}" class="btn btn-primary float-left shadow-sm">Купи</button>
 				<h5 class="font-weight-bold float-right"><span id="real_price_{{ $product[2]->code }}">{{ number_format($real_price_2, 2, ".", "") }}</span> <span style="font-size: 10px;" class="text-muted">{{ $properties[0]->currency }}&nbsp;{{ $dds_text_2 }}</span></h5>
