@@ -181,7 +181,9 @@ function buyOption (real_price, productName, product_typeprice, product_descript
         $real_price = floatval(json_decode($response_body)->new_price);
         $dds_text = '(цена без ДДС)';
     }
-	$real_kg = floatval(json_decode($response_body)->new_kg);
+    $real_kg = floatval(json_decode($response_body)->new_kg);
+    $real_max_h = floatval(json_decode($response_body)->new_max_h);
+    $real_max_l = floatval(json_decode($response_body)->new_max_l);
 ?>
 <br />
 <div id="message_div" class="alert alert-success" role="alert"></div>
@@ -304,6 +306,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                             </dd>
                         </dl>
                     </div>
+                    <input type="hidden" id="real_max_h" value="{{$real_max_h}}" />
                     <div class="col-sm-2">
                         <dl class="param param-inline">
                             <dt>Вис.(H)</dt>
@@ -315,6 +318,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                             <dt>mm</dt>
                         </dl>
                     </div>
+                    <input type="hidden" id="real_max_l" value="{{$real_max_l}}" />
                     <div class="col-sm-2">
                         <dl class="param param-inline">
                             <dt>Шир.(L)</dt>
