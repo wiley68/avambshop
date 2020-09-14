@@ -8,17 +8,17 @@
 <?php $properties = PropertiesController::getAllProperties();?>
 
 <script>
-var before_price = 0;
-var after_price = 0;
-function deliverieMethodsMouseUp(radioname){
-    var old_price = Number.parseFloat($("#span_grand_total_delivery").html());
-    before_price = Number.parseFloat($('input[name='+radioname+']:checked').attr( "data-value" ));
-    $(this).change(function (){
-        after_price = Number.parseFloat($('input[name='+radioname+']:checked').attr( "data-value" ));
-        var new_price = old_price - before_price + after_price;
-        $("#span_grand_total_delivery").html(new_price.toFixed(2));
-        old_price = new_price;
-    })
+function deliverieMethodsMouseUp(id, oldvalue){
+	let old_price = Number.parseFloat($("#span_grand_total_delivery").html());
+	const newvalue = Number.parseFloat($('input[id='+id+']').attr( "data-value" ));
+	const new_price = old_price - oldvalue + newvalue;
+	$("#span_grand_total_delivery").html(new_price.toFixed(2));
+	const grand_total_price = Number.parseFloat($("#span_grand_total_price").html());
+	const grand_total_order = new_price + grand_total_price;
+	$("#span_grand_total_order").html(grand_total_order.toFixed(2));
+}
+function getValueByChecked(name){
+	return Number.parseFloat(document.querySelector('input[name="'+name+'"]:checked').getAttribute("data-value"));
 }
 </script>
 
@@ -207,7 +207,7 @@ function deliverieMethodsMouseUp(radioname){
 					<small class="text-muted">{{$deliverie->description}}</small>
 				</div>
 				<div class="form-check col-md-6">
-					<input class="form-check-input" type="radio" onmouseup="deliverieMethodsMouseUp(this.name);" data-value="{{$transport_price}}" name="deliverieMethods{{$firm['firm_id']}}" id="deliverieMethods{{$deliverie->id}}" value="{{$deliverie->id}}" <?php if ($first_delivery == 0){echo 'checked';}else{if ($deliverie->isdefault == 'Yes'){echo 'checked';}} ?>>
+					<input class="form-check-input" type="radio" onfocus="deliverieMethodsMouseUp(this.id, getValueByChecked(this.name));" data-value="{{$transport_price}}" name="deliverieMethods{{$firm['firm_id']}}" id="deliverieMethods{{$deliverie->id}}" value="{{$deliverie->id}}" <?php if ($first_delivery == 0){echo 'checked';}else{if ($deliverie->isdefault == 'Yes'){echo 'checked';}} ?>>
 					<label class="form-check-label" for="deliverieMethods{{$deliverie->id}}">
 						Избери доставката ({{$transport_price}} {{$properties[0]->currency}})
 					</label>
@@ -280,9 +280,9 @@ function deliverieMethodsMouseUp(radioname){
 	@endif
 	
 	<h4>Обобщена поръчка</h4>
-	<strong>Цена на стоките: {{number_format($grand_total_price, 2, ".", "")}} {{$properties[0]->currency}}</strong><br />
+	<strong>Цена на стоките: <span id="span_grand_total_price">{{number_format($grand_total_price, 2, ".", "")}}</span> {{$properties[0]->currency}}</strong><br />
 	<strong>Цена за доставка на стоките: <span id="span_grand_total_delivery">{{number_format($grand_total_delivery, 2, ".", "")}}</span> {{$properties[0]->currency}}</strong>
-	<h4>Обща цена на поръчката: {{number_format($grand_total_price + $grand_total_delivery, 2, ".", "")}} {{$properties[0]->currency}}</h4>
+	<h4>Обща цена на поръчката: <span id="span_grand_total_order">{{number_format($grand_total_price + $grand_total_delivery, 2, ".", "")}}</span> {{$properties[0]->currency}}</h4>
 	<hr />
 	<p>Вашите лични данни ще бъдат използвани за обработка на Вашата поръчка, както и за други цели, описани в нашата <a href="/politika" target="_blank" title="Политика за поверителност">Политика за поверителност</a>.</p>
 	<div class="form-check">
