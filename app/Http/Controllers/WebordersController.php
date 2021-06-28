@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Weborder;
 use App\Subweborder;
+use App\Http\Controllers\SubwebordersController;
+use App\Http\Controllers\SubdeliveriesController;
 use App\Mail\OrderEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +66,19 @@ class WebordersController extends Controller
 			$order->firm_id = $firm['firm_id'];
 			//save order
 			$order->save();
-			$last_id = $order->id;			
+			$last_id = $order->id;
+			$sub_weborders = SubwebordersController::getSubwebordersByWeborderId($order->id);
+            $order_kg = 0;
+            foreach ($sub_weborders as $sub_weborder){
+                $order_kg += floatval($sub_weborder['kg']);
+            }
+            $price_deliveries = SubdeliveriesController::getSubdeliveriesByDelivery($order->delivery, $order_kg);
+            if (sizeof($price_deliveries) > 0){
+                $price_delivery = floatval($price_deliveries[0]->price);
+            }else{
+                $price_delivery = 0.00;
+            }						
+			$orders[$order_number]['price_delivery'] = $price_delivery;
 			$orders[$order_number]['order'] = $order;
 			
 			//save order details
@@ -90,8 +104,10 @@ class WebordersController extends Controller
 			$objMail->app_name = env('APP_NAME','AVAMB Logiciel');
 			$objMail->order_id = $last_id;
 			$objMail->order_date = $order->dateon;
-			$objMail->allprice = $order->allprice;
+			$objMail->allprice = $order->allprice + $price_delivery;
 			$objMail->payment = $order->payment;
+			$objMail->delivery = $order->delivery;
+			$objMail->price_delivery = $price_delivery;
 			$objMail->firm_id = $order->firm_id;
 			if (isset($firm['items'])){
 				$objMail->items = $firm['items'];
@@ -111,8 +127,10 @@ class WebordersController extends Controller
 			$objMailAdmin->app_name = env('APP_NAME','AVAMB Logiciel');
 			$objMailAdmin->order_id = $last_id;
 			$objMailAdmin->order_date = $order->dateon;
-			$objMailAdmin->allprice = $order->allprice;
+			$objMailAdmin->allprice = $order->allprice + $price_delivery;
 			$objMailAdmin->payment = $order->payment;
+			$objMailAdmin->delivery = $order->delivery;
+			$objMailAdmin->price_delivery = $price_delivery;
 			$objMailAdmin->firm_id = $order->firm_id;
 			if (isset($firm['items'])){
 				$objMailAdmin->items = $firm['items'];
@@ -139,7 +157,7 @@ class WebordersController extends Controller
 
 		$request->session()->forget('cart_session');
         }
-		
+
 		return view('orders/ok', ['orders' => $orders]);
 	}
 	

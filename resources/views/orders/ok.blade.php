@@ -3,8 +3,6 @@
 <?php use App\Http\Controllers\FirmsController;?>
 <?php use App\Http\Controllers\ProductsController;?>
 <?php use App\Http\Controllers\PropertiesController;?>
-<?php use App\Http\Controllers\SubwebordersController;?>
-<?php use App\Http\Controllers\SubdeliveriesController;?>
 <?php $properties = PropertiesController::getAllProperties();?>
 <?php use App\Http\Controllers\WebsettingsController;?>
 
@@ -105,26 +103,13 @@
 			<li class="list-group-item">
 				<div class="row">
 					<div class="col-md-6"><strong>Начин на доставка</strong></strong></div>
-                    <?php
-                        $sub_weborders = SubwebordersController::getSubwebordersByWeborderId($order['order']->id);
-                        $order_kg = 0;
-                        foreach ($sub_weborders as $sub_weborder){
-                            $order_kg += floatval($sub_weborder['kg']);
-                        }
-                        $price_deliveries = SubdeliveriesController::getSubdeliveriesByDelivery($order['order']->delivery, $order_kg);
-                        if (sizeof($price_deliveries) > 0){
-                            $price_delivery = floatval($price_deliveries[0]->price);
-                        }else{
-                            $price_delivery = 0.00;
-                        }
-                    ?>
-					<div class="col-md-6">{{WebdeliveriesController::getDeliveriesById($order['order']->delivery)[0]->name}}&nbsp;(Доставка +{{ number_format($price_delivery, 2, ".", "") }}&nbsp;{{$properties[0]->currency}})</div>
+					<div class="col-md-6">{{WebdeliveriesController::getDeliveriesById($order['order']->delivery)[0]->name}}&nbsp;(Доставка +{{ number_format($order['price_delivery'], 2, ".", "") }}&nbsp;{{$properties[0]->currency}})</div>
 				</div>
 			</li>
 			<li class="list-group-item">
 				<div class="row">
 					<div class="col-md-6"><strong>Обща {{ $dds_text }}</strong></div>
-					<div class="col-md-6"><strong>{{number_format($total_price + $price_delivery, 2, ".", "")}} {{$properties[0]->currency}}</strong></div>
+					<div class="col-md-6"><strong>{{number_format($total_price + $order['price_delivery'], 2, ".", "")}} {{$properties[0]->currency}}</strong></div>
 				</div>
 			</li>
 			@endif

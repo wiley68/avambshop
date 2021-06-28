@@ -1,4 +1,5 @@
 <?php use App\Http\Controllers\WebpaymentsController;?>
+<?php use App\Http\Controllers\WebdeliveriesController;?>
 <?php use App\Http\Controllers\FirmsController;?>
 <?php use App\Http\Controllers\ProductsController;?>
 <?php use App\Http\Controllers\WebsettingsController;?>
@@ -50,6 +51,10 @@
 	<tr>
 		<td>Начин на плащане</td>
 		<td>{{ WebpaymentsController::getPaymentsById($order->payment)[0]->name }}</td>
+	</tr>
+	<tr>
+		<td>Начин на доставка</td>
+		<td>{{ WebdeliveriesController::getDeliveriesById($order->delivery)[0]->name }}&nbsp;(Доставка +{{ number_format($order->price_delivery, 2, ".", "") }}&nbsp;{{ $dds_text }}</td>
 	</tr>
 	<tr>
 		<td>Обща цена&nbsp;{{ $dds_text }}</td>

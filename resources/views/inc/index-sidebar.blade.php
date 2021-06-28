@@ -22,7 +22,7 @@
 		<h5 class="card-title">Интересни предложения</h5>
 		@foreach($products as $product)
 		<div class="photo" style="padding:5px;">
-			<a href="/product?pid={{ $product->code }}" title="{{ $product->name }}"> <img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, -4) }}.jpg" style="width:200px;border:2px solid #1D5C80;" alt="Product Image" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" /> </a>
+			<a href="/product?pid={{ $product->code }}" title="{{ $product->name }}"> <img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, 3, 3) }}{{ substr($product->code, -4) }}.jpg" style="width:200px;border:2px solid #1D5C80;" alt="Product Image" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" /> </a>
 		</div>		
 		@endforeach
 	</div>

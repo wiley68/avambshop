@@ -197,7 +197,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
             <article class="gallery-wrap">
                 <a href="#" data-toggle="modal" data-target="#modalPicture">
                     <div id="product_image" class="img-big-wrap"
-                        style="background-image:url({{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, -4) }}.jpg);">
+                        style="background-image:url({{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, 3, 3) }}{{ substr($product->code, -4) }}.jpg);">
                     </div> <!-- slider-product.// -->
                 </a>
                 <div class="modal fade" id="modalPicture" tabindex="-1" role="dialog" aria-labelledby="productName"
@@ -212,7 +212,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                             </div>
                             <div class="modal-body">
                                 <div id="product_image_body" class="img-big-wrap"
-                                    style="background-image:url({{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, -4) }}.jpg)">
+                                    style="background-image:url({{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, 3, 3) }}{{ substr($product->code, -4) }}.jpg)">
                                 </div>
                             </div>
                         </div>
@@ -221,8 +221,8 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                 <hr />
                 <div class="img-small-wrap">
                     <div class="item-gallery"> <img
-                            onclick="changeGalleryPictureFirst('{{ env('APP_SITE') }}', '{{ substr($product->code, -4) }}');"
-                            src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, -4) }}.jpg"
+                            onclick="changeGalleryPictureFirst('{{ env('APP_SITE') }}', '{{ substr($product->code, 3, 3) }}{{ substr($product->code, -4) }}');"
+                            src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product->code, 3, 3) }}{{ substr($product->code, -4) }}.jpg"
                             onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'"> </div>
                     @if ($firm1->first()->isspec > 0)
                     @if ($product->gallery1 != 0)
@@ -518,7 +518,7 @@ function buyOption (real_price, productName, product_typeprice, product_descript
                     <tr>
                         <td><a href="/product?pid={{ $subproduct->code }}" title="{{ $subproduct->name }}"><img
                                     style="max-width:60px;"
-                                    src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($subproduct->code, -4) }}.jpg"
+                                    src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($subproduct->code, 3, 3) }}{{ substr($subproduct->code, -4) }}.jpg"
                                     onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'"></a></td>
                         <td><a href="/product?pid={{ $subproduct->code }}"
                                 title="{{ $subproduct->name }}">{{ $subproduct->code }}</a></td>

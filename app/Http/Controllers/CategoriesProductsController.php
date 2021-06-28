@@ -6,8 +6,8 @@ use App\CategoriesProducts;
 
 class CategoriesProductsController extends Controller
 {
-    public static function getCategoryById($category_id){
-        $categories = CategoriesProducts::where('id', $category_id)->get();
+    public static function getCategoryById($category_code){
+        $categories = CategoriesProducts::where('code', $category_code)->get();
         return $categories;
     }
 
@@ -17,10 +17,10 @@ class CategoriesProductsController extends Controller
     }
 
     public static function getCategoriesByShop(){
-        $categories = CategoriesProducts::select('id')->where('isshop', 1)->get();
+        $categories = CategoriesProducts::select('code')->where('isshop', 1)->get();
         $categories_arr = [];
         foreach ($categories as $category) {
-            $categories_arr[] = $category->id;
+            $categories_arr[] = $category->code;
         }
         return $categories_arr;
     }

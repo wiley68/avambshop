@@ -116,7 +116,7 @@
 	<div class="card border-info mb-3 shadow-lg bg-white rounded">
 		<div class="photo text-center containerdiv" style="height:260px;margin:2px;overflow:hidden;">
 			<a href="/product?pid={{ $product[0]->code }}" title="Разгледай подробно продукта {{ $product[0]->name }}"> 
-				<img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product[0]->code, -4) }}.jpg" class="img-thumbnail" alt="{{ $product[0]->code }}" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" /> 
+				<img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product[0]->code, 3, 3) }}{{ substr($product[0]->code, -4) }}.jpg" class="img-thumbnail" alt="{{ $product[0]->code }}" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" /> 
 			</a>
 			<img class="cornerimage" border="0" src="{{ env('APP_SITE') }}/dist/img/logo_{{ $product[0]->firm_id }}.jpg" alt="{{ $firm1[0]->firm }}" title="{{ $firm1[0]->firm }}" style="position:absolute;width:30px;top:5px;right:5px;z-index:2;border:1px solid silver;">
 		</div>
@@ -186,7 +186,7 @@
 	<div class="card border-info mb-3 shadow-lg bg-white rounded">
 		<div class="photo text-center" style="height:260px;margin:2px;overflow:hidden;">
 			<a href="/product?pid={{ $product[1]->code }}" title="Разгледай подробно продукта {{ $product[1]->name }}"> 
-				<img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product[1]->code, -4) }}.jpg" class="img-thumbnail" alt="{{ $product[1]->code }}" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" /> 
+				<img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product[1]->code, 3, 3) }}{{ substr($product[1]->code, -4) }}.jpg" class="img-thumbnail" alt="{{ $product[1]->code }}" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" /> 
 			</a>
 			<img class="cornerimage" border="0" src="{{ env('APP_SITE') }}/dist/img/logo_{{ $product[1]->firm_id }}.jpg" alt="{{ $firm2[0]->firm }}" title="{{ $firm2[0]->firm }}" style="position:absolute;width:30px;top:5px;right:5px;z-index:2;border:1px solid silver;">
 		</div>
@@ -259,7 +259,7 @@
 	<div class="card border-info mb-3 shadow-lg bg-white rounded">
 		<div class="photo text-center" style="height:260px;margin:2px;overflow:hidden;">
 			<a href="/product?pid={{ $product[2]->code }}" title="Разгледай подробно продукта {{ $product[2]->name }}"> 
-				<img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product[2]->code, -4) }}.jpg" class="img-thumbnail" alt="{{ $product[2]->code }}" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" /> 
+				<img src="{{ env('APP_SITE') }}/dist/img/products/product_{{ substr($product[2]->code, 3, 3) }}{{ substr($product[2]->code, -4) }}.jpg" class="img-thumbnail" alt="{{ $product[2]->code }}" onerror="this.src='{{ env('APP_SITE') }}/dist/img/products/product_.jpg'" /> 
 			</a>
 			<img class="cornerimage" border="0" src="{{ env('APP_SITE') }}/dist/img/logo_{{ $product[2]->firm_id }}.jpg" alt="{{ $firm3[0]->firm }}" title="{{ $firm3[0]->firm }}" style="position:absolute;width:30px;top:5px;right:5px;z-index:2;border:1px solid silver;">
 		</div>

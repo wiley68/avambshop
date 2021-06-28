@@ -16,7 +16,7 @@
                         <a class="dropdown-item {{ (Request::is('products/by_category')) ? 'active' : '' }}" href="/products">Всички продукти</a>
                         @if(count(CategoriesProductsController::getCategories()) > 0)
 							@foreach(CategoriesProductsController::getCategories() as $category)
-								<a class="dropdown-item {{ (Request::is('products/by_category') AND (request()->get('category_id') == $category->id)) ? 'active' : '' }}" href="{{ route('products.by_category', ['id' => $category->id]) }}">{{ $category->name }}</a>
+								<a class="dropdown-item {{ (Request::is('products/by_category') AND (request()->get('category_code') == $category->code)) ? 'active' : '' }}" href="{{ route('products.by_category', ['id' => $category->code]) }}">{{ $category->name }}</a>
 							@endforeach
 						@endif
 					</div>
