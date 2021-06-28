@@ -30,10 +30,6 @@ class PagesController extends Controller
 		return view('about');
 	}
 
-	public function getPaypal(){
-		return view('paypal');
-	}
-
 	public function getContact(){
 		return view('contact');
 	}

@@ -13,7 +13,6 @@
 
 Route::get('/', 'PagesController@getHome');
 Route::get('/about', 'PagesController@getAbout');
-Route::get('/paypal', 'PagesController@getPaypal');
 Route::get('/contact', 'PagesController@getContact');
 Route::get('/request/{id}', 'PagesController@requestProduct')->name('request-product');
 Route::post('/request/submit', 'MessagesController@submitRequest');
