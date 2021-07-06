@@ -49,6 +49,9 @@
                     case 'prikluchena':
                         $status = 'Приключена';
                         break;
+                    case 'platena':
+                        $status = 'Платена';
+                        break;
                     default:
                         $status = 'Обработка';
                         break;

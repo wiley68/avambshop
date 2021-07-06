@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +23,7 @@ Route::get('/sitemap', 'PagesController@getSitemap');
 Route::get('/profile', 'PagesController@getProfile');
 Route::get('/orders', 'PagesController@getOrders')->name('orders');
 Route::get('/delete-order{id}', 'WebordersController@deleteOrder')->name('delete-order');
+Route::get('/pay-order{id}', 'WebordersController@payOrder')->name('pay-order');
 Route::get('/user-order{id}', 'PagesController@getUserOrder')->name('user-order');
 Route::get('/terms', 'PagesController@getTerms');
 Route::get('/politika', 'PagesController@getPolitika');
@@ -40,6 +44,6 @@ Route::get('/order', 'PagesController@getOrder');
 Route::post('/order/submit', 'WebordersController@submit');
 Route::get('/order/print/{ids}', 'WebordersController@print')->name('order.print');
 Route::get('/mailorder', 'PagesController@getEmailsOrder');
-Route::get('sendhtmlemail','MailController@html_email');
+Route::get('sendhtmlemail', 'MailController@html_email');
 
 Auth::routes();

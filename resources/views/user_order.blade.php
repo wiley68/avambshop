@@ -45,6 +45,9 @@
                     case 'prikluchena':
                     $status = 'Приключена';
                     break;
+                    case 'platena':
+                    $status = 'Платена';
+                    break;
                     default:
                     $status = 'Обработка';
                     break;
@@ -130,9 +133,58 @@
 <hr />
 Крайна цена {{ number_format($order->allprice + $deliveryprice, 2, ".", "") }}&nbsp;{{ $properties->currency }}&nbsp;<strong>{{ $dds_text }}</strong>
 </div>
+@php
+    $price_eur = number_format(floatval($order->allprice + $deliveryprice) / 1.95583, 2, ".", "");
+@endphp
 <hr />
-<a href="/orders" class="btn btn-info">Обратно в моите поръчки</a>
-<a target="_blank" href="{{ route('order.print', ['id' => $order->id]) }}" class="btn btn-info">Принтирай</a>
+<div class="d-flex justify-content-start">
+    <a href="/orders" class="btn btn-info h-100 d-inline-block mr-2">Обратно в моите поръчки</a>
+    <a target="_blank" href="{{ route('order.print', ['id' => $order->id]) }}" class="btn btn-info h-100 d-inline-block mr-2">Принтирай</a>
+    @if (($order->status == "obrabotka") && ($payment->isbank == "Card"))
+    <script src="https://www.paypal.com/sdk/js?client-id=AQOD85pTVwm9xpGCEMVkRY2WIr8ZjoXbUJYYzBbb2U0l8gy_h4eCykQmoIHDyFznNZhjlH3WRQjxpYtX&currency=EUR&locale=bg_BG" data-order-id="{{ $order->id }}" data-page-type="cart">
+    </script>
+    
+    <div id="paypal-button-container" class="flex-fill"></div>
+    
+    <!-- Add the checkout buttons, set up the order and approve the order -->
+    <script>
+      paypal.Buttons({
+        style: {
+            color:   'blue',
+            shape:   'rect',
+            label:   'pay',
+            height: 36
+        },
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              reference_id: "{{ $order->id }}",
+              amount: {
+                currency_code: "EUR",
+                value: '{{$price_eur}}'
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert("Успешно платихте Вашата поръчка с номер: {{ $order->id }}");
+            $.ajax({
+                type:'GET',
+                url:'/pay-order{{ $order->id }}',
+                success: function (data) {
+                        if (data.result == 'success'){
+                            window.location.reload();
+                        }
+                    }
+                });
+            });
+        }
+      }).render('#paypal-button-container');
+      
+    </script> 
+    @endif    
+</div>
 @endguest
 
 @endsection
