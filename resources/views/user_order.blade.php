@@ -135,13 +135,19 @@
 </div>
 @php
     $price_eur = number_format(floatval($order->allprice + $deliveryprice) / 1.95583, 2, ".", "");
+    $paypal_status = $payment->paypal_status;
+    if ($paypal_status == 0){
+        $paypal_client_id = $payment->sandbox_client_id;
+    }else{
+        $paypal_client_id = $payment->paypal_client_id;
+    }
 @endphp
 <hr />
 <div class="d-flex justify-content-start">
     <a href="/orders" class="btn btn-info h-100 d-inline-block mr-2">Обратно в моите поръчки</a>
     <a target="_blank" href="{{ route('order.print', ['id' => $order->id]) }}" class="btn btn-info h-100 d-inline-block mr-2">Принтирай</a>
-    @if (($order->status == "obrabotka") && ($payment->isbank == "Card"))
-    <script src="https://www.paypal.com/sdk/js?client-id=AQOD85pTVwm9xpGCEMVkRY2WIr8ZjoXbUJYYzBbb2U0l8gy_h4eCykQmoIHDyFznNZhjlH3WRQjxpYtX&currency=EUR&locale=bg_BG" data-order-id="{{ $order->id }}" data-page-type="cart">
+    @if (($order->status == "obrabotka") && ($payment->isbank == "Card") && ($paypal_client_id != ""))
+    <script src="https://www.paypal.com/sdk/js?client-id={{ $paypal_client_id }}&currency=EUR&locale=bg_BG" data-order-id="{{ $order->id }}" data-page-type="cart">
     </script>
     
     <div id="paypal-button-container" class="flex-fill"></div>
