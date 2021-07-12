@@ -59,11 +59,10 @@ class PagesController extends Controller
 		]);
 	}
 
-	public function getUserOrder(Request $request, $id = null)
+	public function getUserOrder(Request $request)
 	{
-		$user = Auth::user();
-		if ($id != null) {
-			$order = Weborder::where(['id' => $id])->first();
+		if ($request->isMethod('post') && $request->input('id') != null) {
+			$order = Weborder::where(['id' => $request->input('id')])->first();
 			$firm = Firm::where(['id' => $order->firm_id])->first();
 			$properties = PropertiesController::getAllProperties()->first();
 			return view('user_order')->with([

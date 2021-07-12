@@ -58,7 +58,15 @@
                 }
             @endphp
             <td>{{ $status }}</td>
-            <td><a title="Можете да прегледате подробни данни за поръчката." href="{{ route('user-order', ['id' => $order->id]) }}">Преглед</a>&nbsp;|&nbsp;<a title="Можете да изтриете тази поръчка." href="{{ route('delete-order', ['id' => $order->id]) }}">Изтриване</a></td>
+            <td class="column-verticallineMiddle form-inline" style="vertical-align:middle;">
+                <form class="form-inline my-2 my-lg-0" enctype="multipart/form-data"
+                    action="{{ route('user-order') }}" method="post" name="user_order" id="user_order" novalidate>
+                    {{ csrf_field() }}
+                    <input name="id" id="id" type="hidden" value="{{ $order->id }}">
+                    <button class="btn btn-sm btn-primary text-uppercase" type="submit">Преглед</button>
+                </form>&nbsp;
+                <a title="Можете да изтриете тази поръчка." class="btn btn-sm btn-danger text-uppercase" href="{{ route('delete-order', ['id' => $order->id]) }}">Изтриване</a>
+            </td>
         </tr>                
         @endforeach
     </tbody>

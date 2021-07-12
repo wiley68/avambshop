@@ -35,6 +35,7 @@ class WebordersController extends Controller
 		if (isset($cart_session)) {
 			//generate orders
 			$order_number = 0;
+			$order_ids = "";
 			foreach ($cart_session['firms'] as $firm) {
 				$order = new Weborder;
 				$order->dateon = date('Y-m-d H:i:s');
@@ -68,6 +69,7 @@ class WebordersController extends Controller
 				//save order
 				$order->save();
 				$last_id = $order->id;
+				$order_ids .= $order->id . '_';
 				$sub_weborders = SubwebordersController::getSubwebordersByWeborderId($order->id);
 				$order_kg = 0;
 				foreach ($sub_weborders as $sub_weborder) {
@@ -155,11 +157,20 @@ class WebordersController extends Controller
 				$order_number++;
 			}
 			//generate orders
-
+			$order_ids = rtrim($order_ids, '_');
 			$request->session()->forget('cart_session');
 		}
 
-		return view('orders/ok', ['orders' => $orders]);
+		return redirect()->route('orders-ok', ['orders' => $order_ids]);
+	}
+
+	public function ok(Request $request, $orders = null)
+	{
+		if ($orders != null) {
+			return view('/orders/ok')->with([
+				'orders' => $orders
+			]);
+		}
 	}
 
 	public function print(Request $request, $id = null)
