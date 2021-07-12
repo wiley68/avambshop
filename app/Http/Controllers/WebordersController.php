@@ -194,17 +194,19 @@ class WebordersController extends Controller
 		}
 	}
 
-	public function deleteOrder(Request $request, $id = null)
+	public function deleteOrder(Request $request)
 	{
-		$user = Auth::user();
-		if (($id != null) && (!empty($user))) {
-			Weborder::where(['id' => $id])->where(['user_id' => $user->id])->delete();
-			$orders = Weborder::where(['user_id' => $user->id])->orderBy('id', 'DESC')->get();
-			$properties = PropertiesController::getAllProperties()->first();
-			return view('orders')->with([
-				'orders' => $orders,
-				'properties' => $properties
-			]);
+		if ($request->isMethod('post') && $request->input('id') != null) {
+			$user = Auth::user();
+			if (!empty($user)) {
+				Weborder::where(['id' => $request->input('id')])->where(['user_id' => $user->id])->delete();
+				$orders = Weborder::where(['user_id' => $user->id])->orderBy('id', 'DESC')->get();
+				$properties = PropertiesController::getAllProperties()->first();
+				return view('orders')->with([
+					'orders' => $orders,
+					'properties' => $properties
+				]);
+			}
 		}
 	}
 

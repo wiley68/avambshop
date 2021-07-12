@@ -65,7 +65,12 @@
                     <input name="id" id="id" type="hidden" value="{{ $order->id }}">
                     <button class="btn btn-sm btn-primary text-uppercase" type="submit">Преглед</button>
                 </form>&nbsp;
-                <a title="Можете да изтриете тази поръчка." class="btn btn-sm btn-danger text-uppercase" href="{{ route('delete-order', ['id' => $order->id]) }}">Изтриване</a>
+                <form class="form-inline my-2 my-lg-0" enctype="multipart/form-data"
+                    action="{{ route('delete-order') }}" method="post" name="delete-order" id="delete-order" novalidate>
+                    {{ csrf_field() }}
+                    <input name="id" id="id" type="hidden" value="{{ $order->id }}">
+                    <button class="btn btn-sm btn-danger text-uppercase" type="submit">Изтриване</button>
+                </form>
             </td>
         </tr>                
         @endforeach
