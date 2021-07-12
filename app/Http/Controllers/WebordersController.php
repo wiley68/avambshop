@@ -210,14 +210,23 @@ class WebordersController extends Controller
 		}
 	}
 
-	public function payOrder(Request $request, $id = null)
+	public function payOrder(Request $request, $id = null, $paypal_id = null)
 	{
-		$user = Auth::user();
-		if (($id != null) && (!empty($user))) {
-			$order = Weborder::where(['id' => $id])->where(['user_id' => $user->id])->first();
-			$order->status = "platena";
-			$order->save();
-			return response()->json(['result' => 'success']);
+		if (($id != null) && ($paypal_id != null)) {
+			$user = Auth::user();
+			if (!empty($user)) {
+				$order = Weborder::where(['id' => $id])->where(['user_id' => $user->id])->first();
+			} else {
+				$order = Weborder::where(['id' => $id])->where(['user_id' => 0])->first();
+			}
+			if (!empty($order)) {
+				$order->status = "platena";
+				$order->paypal_id = $paypal_id;
+				$order->save();
+				return response()->json(['result' => 'success']);
+			} else {
+				return response()->json(['result' => 'unsuccess']);
+			}
 		}
 	}
 }

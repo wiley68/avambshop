@@ -62,7 +62,12 @@
                                 @php
                                     $payment = Webpayment::where(['id' => $order->payment])->first();
                                 @endphp
-                                <td>{{ $payment->name }}</td>
+                                <td>
+                                    {{ $payment->name }}
+                                    @if ($order->status == 'platena' && $payment->isbank == 'Card')
+                                        (Поръчката е платена с PayPal ID: {{ $order->paypal_id }})
+                                    @endif
+                                </td>
                             </tr>
                             <tr>
                                 <td>Начин на доставка</td>
@@ -186,12 +191,21 @@
                         },
                         onApprove: function(data, actions) {
                             return actions.order.capture().then(function(details) {
-                                alert("Успешно платихте Вашата поръчка с номер: {{ $order->id }}");
+                                if (details.purchase_units[0].payments.captures[0].id != null) {
+                                    paypal_id = details.purchase_units[0].payments.captures[0].id;
+                                } else {
+                                    paypal_id = "";
+                                }
+                                alert("Успешно платихте Вашата поръчка с номер: {{ $order->id }}. Номер на транзакция в PayPal: " +
+                                    paypal_id);
                                 $.ajax({
                                     type: 'GET',
-                                    url: '/pay-order{{ $order->id }}',
+                                    url: '/pay-order/{{ $order->id }}/' + paypal_id,
                                     success: function(data) {
                                         if (data.result == 'success') {
+                                            window.location =
+                                                '{{ redirect()->getUrlGenerator()->previous() }}';
+                                        } else {
                                             window.location.reload();
                                         }
                                     }

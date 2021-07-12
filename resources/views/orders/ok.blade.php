@@ -120,6 +120,9 @@ if ($settings[0]->dds == 'Yes') {
                                         <div class="col-md-6"><strong>Начин на плащане</strong></strong></div>
                                         <div class="col-md-6">
                                             {{ WebpaymentsController::getPaymentsById($order->payment)[0]->name }}
+                                            @if ($order->status == 'platena' && WebpaymentsController::getPaymentsById($order->payment)[0]->isbank == 'Card')
+                                                (Поръчката е платена с PayPal ID: {{ $order->paypal_id }})
+                                            @endif
                                         </div>
                                     </div>
                                 </li>

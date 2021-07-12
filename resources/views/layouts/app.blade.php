@@ -28,7 +28,7 @@
     <div style="padding-bottom:10px;"></div>
     <div class="container">
         <div class="row">
-            @if (Request::is('login') or Request::is('password/reset') or Request::is('register') or Request::is('product') or Request::is('cart') or Request::is('order') or Request::is('order/submit') or Request::is('orders/ok/*'))
+            @if (Request::is('login') or Request::is('password/reset') or Request::is('register') or Request::is('product') or Request::is('cart') or Request::is('order') or Request::is('order/submit') or Request::is('orders/ok/*') or Request::is('orders'))
                 <div class="col-lg-12 col-md-12">
                     @yield('content')
                 </div>

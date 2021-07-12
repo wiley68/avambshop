@@ -1,4 +1,6 @@
 <?php use App\Firm; ?>
+<?php use App\Http\Controllers\WebpaymentsController; ?>
+
 @extends('layouts/app')
 
 @section('content')
@@ -57,7 +59,12 @@
                         break;
                 }
             @endphp
-            <td>{{ $status }}</td>
+            <td>
+                {{ $status }}
+                @if ($order->status == 'platena' && WebpaymentsController::getPaymentsById($order->payment)[0]->isbank == 'Card')
+                    (PayPal ID: {{ $order->paypal_id }})
+                @endif
+            </td>
             <td class="column-verticallineMiddle form-inline" style="vertical-align:middle;">
                 <form class="form-inline my-2 my-lg-0" enctype="multipart/form-data"
                     action="{{ route('user-order') }}" method="post" name="user_order" id="user_order" novalidate>
