@@ -25,6 +25,7 @@ Route::get('/orders', 'PagesController@getOrders')->name('orders');
 Route::post('/delete-order', 'WebordersController@deleteOrder')->name('delete-order');
 Route::get('/pay-order/{id}/{paypal_id}', 'WebordersController@payOrder')->name('pay-order');
 Route::post('/user-order', 'PagesController@getUserOrder')->name('user-order');
+Route::get('/user-order-email/{id}', 'PagesController@getUserOrderEmail')->name('user-order-email');
 Route::get('/terms', 'PagesController@getTerms');
 Route::get('/politika', 'PagesController@getPolitika');
 Route::get('/dostavka', 'PagesController@getDostavka');

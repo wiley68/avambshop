@@ -51,18 +51,36 @@ class PagesController extends Controller
 	public function getOrders()
 	{
 		$user = Auth::user();
-		$orders = Weborder::where(['user_id' => $user->id])->orderBy('id', 'DESC')->get();
-		$properties = PropertiesController::getAllProperties()->first();
-		return view('orders')->with([
-			'orders' => $orders,
-			'properties' => $properties
-		]);
+		if (!empty($user)) {
+			$orders = Weborder::where(['user_id' => $user->id])->orderBy('id', 'DESC')->get();
+			$properties = PropertiesController::getAllProperties()->first();
+			return view('orders')->with([
+				'orders' => $orders,
+				'properties' => $properties
+			]);
+		} else {
+			return redirect()->route('login');
+		}
 	}
 
 	public function getUserOrder(Request $request)
 	{
 		if ($request->isMethod('post') && $request->input('id') != null) {
 			$order = Weborder::where(['id' => $request->input('id')])->first();
+			$firm = Firm::where(['id' => $order->firm_id])->first();
+			$properties = PropertiesController::getAllProperties()->first();
+			return view('user_order')->with([
+				'order' => $order,
+				'properties' => $properties,
+				'firm' => $firm
+			]);
+		}
+	}
+
+	public function getUserOrderEmail(Request $request, $id = null)
+	{
+		if ($request->isMethod('get') && $id != null) {
+			$order = Weborder::where(['id' => $id])->first();
 			$firm = Firm::where(['id' => $order->firm_id])->first();
 			$properties = PropertiesController::getAllProperties()->first();
 			return view('user_order')->with([
